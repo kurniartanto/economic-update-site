@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>What Happened in the Last 24 Hours — Economic News Dashboard</title>
+  <style>
+    :root {
+      --primary: #5A1F59;
+      --primary-dark: #3B123A;
+      --primary-mid: #743073;
+      --primary-soft: #8F4B8E;
+      --gold: #FBBA15;
+      --gold-soft: #FFD766;
+      --gold-pale: #FFF2C2;
+      --bg: #fbf8fc;
+      --card: #ffffff;
+      --ink: #251c2b;
+      --muted: #706575;
+      --line: #eadfed;
+      --danger: #8A1E2D;
+      --ok: #1f7a4d;
+      --warn: #af6c00;
+      --shadow: 0 12px 30px rgba(59,18,58,.10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, #fff7d8 0, transparent 28rem), linear-gradient(180deg, #fff, var(--bg));
+      line-height: 1.55;
+    }
+    a { color: var(--primary); text-decoration: none; font-weight: 700; }
+    a:hover { text-decoration: underline; }
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-mid));
+      color: white;
+      padding: 34px 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      right: -160px; top: -170px;
+      background: radial-gradient(circle, rgba(251,186,21,.42), rgba(251,186,21,0) 68%);
+    }
+    .hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(251,186,21,.15);
+      border: 1px solid rgba(251,186,21,.75);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 7px 12px;
+      border-radius: 999px;
+    }
+    h1 { margin: 18px 0 8px; font-size: clamp(32px, 4.5vw, 58px); line-height: 1.04; letter-spacing: -.04em; }
+    .subtitle { max-width: 980px; font-size: 17px; color: rgba(255,255,255,.90); margin: 0 0 22px; }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 12px;
+      max-width: 1000px;
+    }
+    .meta-card {
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 15px;
+      padding: 12px 14px;
+    }
+    .meta-card small { display:block; color: rgba(255,255,255,.72); font-size: 11px; text-transform: uppercase; letter-spacing:.06em; font-weight: 800; }
+    .meta-card strong { display:block; margin-top: 3px; font-size: 14px; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 18px;
+    }
+    .nav button, .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: .15s ease;
+    }
+    .nav button.active, .btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .btn.gold {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--primary-dark);
+    }
+    main { max-width: 1240px; margin: 0 auto; padding: 22px 18px 60px; }
+    section { margin: 28px 0; scroll-margin-top: 72px; }
+    .section-title {
+      display:flex; align-items:flex-end; justify-content:space-between; gap: 14px;
+      margin-bottom: 14px;
+      border-left: 6px solid var(--gold);
+      padding-left: 12px;
+    }
+    .section-title h2 { margin:0; color: var(--primary-dark); font-size: 25px; letter-spacing: -.02em; }
+    .section-title p { margin:0; color: var(--muted); font-size: 13px; }
+    .grid { display:grid; gap: 16px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .summary-list { margin: 0; padding-left: 20px; }
+    .summary-list li { margin: 8px 0; }
+    .pulse-card {
+      display:flex; flex-direction:column; gap:10px;
+      min-height: 132px;
+    }
+    .pulse-label { color: var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+    .pulse-value { color: var(--primary-dark); font-size: 23px; font-weight: 900; letter-spacing:-.02em; }
+    .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top: 8px; }
+    .pill {
+      display:inline-flex; align-items:center; gap:6px;
+      border-radius:999px; padding:5px 9px;
+      background:#f7f1f8; border:1px solid var(--line);
+      font-size: 12px; color: var(--primary-dark); font-weight: 750;
+    }
+    .pill.high { background: #fff1f3; border-color:#eab9c0; color:#8A1E2D; }
+    .pill.medium { background: var(--gold-pale); border-color: var(--gold-soft); color: var(--primary-dark); }
+    .controls {
+      display:grid;
+      grid-template-columns: 1fr 190px 170px;
+      gap:10px;
+      margin-bottom: 14px;
+    }
+    input, select {
+      width:100%;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font: inherit;
+      background:#fff;
+      color:var(--ink);
+    }
+    .news-card {
+      padding: 0;
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .news-head {
+      padding: 17px 17px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .news-topline { display:flex; justify-content:space-between; align-items:center; gap: 10px; margin-bottom:8px; }
+    .country { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; font-weight: 900; }
+    .impact-badge {
+      border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight:900;
+    }
+    .impact-badge.High { background: #8A1E2D; color:#fff; }
+    .impact-badge.Medium { background: var(--gold); color:var(--primary-dark); }
+    .news-card h3 { margin: 4px 0 8px; font-size: 18px; line-height: 1.25; color: var(--primary-dark); }
+    .news-card p { margin:0; color:#3b3140; }
+    .news-body { padding: 14px 17px 17px; display:none; }
+    .news-card.open .news-body { display:block; }
+    .detail-grid { display:grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0; }
+    .detail-box {
+      background:#fbf7fc; border:1px solid var(--line); border-radius:14px; padding:12px;
+      font-size: 13px;
+    }
+    .detail-box strong { display:block; color: var(--primary-dark); margin-bottom: 4px; }
+    .news-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top: 12px; }
+    .toggle-detail {
+      border: none; background: var(--primary); color:#fff; border-radius:999px;
+      padding: 8px 11px; font-weight:850; cursor:pointer;
+    }
+    .country-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 14px; }
+    .country-tabs button {
+      border:1px solid var(--line); background:#fff; color:var(--primary-dark);
+      border-radius:999px; padding:8px 11px; font-weight:800; cursor:pointer;
+    }
+    .country-tabs button.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .country-panel h3 { margin-top:0; color:var(--primary-dark); }
+    .country-panel .label { color:var(--muted); font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:.06em; margin-top:12px; }
+    .table-scroll {
+      overflow-x: auto;
+      overflow-y: visible;
+      border-radius: 16px;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--line);
+      background:#fff;
+      box-shadow: var(--shadow);
+    }
+    table { border-collapse: collapse; width:100%; }
+    #calendarTable {
+      min-width: 2260px;
+      table-layout: fixed;
+    }
+    #calendarTable th,
+    #calendarTable td {
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+      overflow: hidden;
+    }
+    #calendarTable th {
+      background: var(--primary-dark);
+      color:#fff;
+      text-align:left;
+      padding:12px 10px;
+      font-size: 12px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      cursor:pointer;
+    }
+    #calendarTable td {
+      border-top:1px solid var(--line);
+      padding:12px 10px;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    #calendarTable tr:nth-child(even) td { background:#fcf9fd; }
+    #calendarTable .col-time {
+      width: 128px;
+      white-space: nowrap;
+    }
+    #calendarTable .col-country {
+      width: 170px;
+      white-space: nowrap;
+    }
+    #calendarTable .col-indicator {
+      width: 320px;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    #calendarTable .col-impact {
+      width: 76px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    #calendarTable .col-actual,
+    #calendarTable .col-forecast,
+    #calendarTable .col-previous {
+      width: 200px;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    #calendarTable .col-surprise {
+      width: 250px;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    #calendarTable .col-interpretation {
+      width: 480px;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    #calendarTable .col-market {
+      width: 240px;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    #calendarTable th.col-time,
+    #calendarTable th.col-country,
+    #calendarTable th.col-impact {
+      white-space: nowrap;
+    }
+    .impact-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      font-weight: 900;
+    }
+    .impact-letter.high {
+      background: #8A1E2D;
+      color: #fff;
+    }
+    .impact-letter.medium {
+      background: #FBBA15;
+      color: #3B123A;
+    }
+    .table-legend {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #706575;
+    }
+    .heatmap-table {
+      min-width: 1100px;
+      table-layout: fixed;
+    }
+    .heatmap-table th {
+      background: var(--primary-dark);
+      color: #fff;
+      text-align:left;
+      padding: 11px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing:.04em;
+    }
+    .heatmap-table td {
+      padding: 10px 11px;
+      border-top:1px solid var(--line);
+      font-size: 13px;
+      overflow:hidden;
+    }
+    .score {
+      display:inline-flex; justify-content:center; align-items:center;
+      width:34px; height:30px; border-radius:9px; font-weight:900;
+      border:1px solid rgba(59,18,58,.15);
+    }
+    .s1 { background:#f2f7f4; color:#1f7a4d; }
+    .s2 { background:#eef5ff; color:#24527a; }
+    .s3 { background:#fff8d8; color:#886200; }
+    .s4 { background:#ffe6cf; color:#9a4b00; }
+    .s5 { background:#ffe2e7; color:#8A1E2D; }
+    .watch-item { border-left: 5px solid var(--gold); padding-left:12px; }
+    .watch-item h3 { margin:0 0 4px; color: var(--primary-dark); }
+    .watch-item p { margin:3px 0; color: var(--muted); }
+    .source-list { columns: 2; column-gap: 28px; }
+    .source-list li { break-inside: avoid; margin: 7px 0; }
+    .print-note {
+      background: var(--gold-pale);
+      border:1px solid var(--gold-soft);
+      border-radius: 16px;
+      padding:14px;
+      color: var(--primary-dark);
+      font-size: 13px;
+    }
+    footer { text-align:center; color:var(--muted); padding:30px 18px 50px; }
+    @media (max-width: 860px) {
+      .hero-meta, .grid.cols-2, .grid.cols-3, .grid.cols-4, .controls { grid-template-columns:1fr; }
+      .source-list { columns: 1; }
+      .section-title { align-items:flex-start; flex-direction:column; }
+      main { padding-left: 12px; padding-right: 12px; }
+    }
+    @media print {
+      body { background:#fff; color:#111; }
+      .nav, .controls, .toggle-detail, .btn { display:none !important; }
+      .hero { background:#5A1F59 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { max-width: none; padding: 12px; }
+      .card, .table-scroll { box-shadow:none; break-inside: avoid; }
+      .news-body { display:block !important; }
+      .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr 1fr; }
+      .table-scroll { overflow: visible; }
+      #calendarTable { min-width: auto; font-size: 8.5pt; }
+      #calendarTable th, #calendarTable td { padding: 5px; }
+      #calendarTable .col-time { width: 80px; }
+      #calendarTable .col-country { width: 75px; }
+      #calendarTable .col-indicator { width: 130px; }
+      #calendarTable .col-impact { width: 42px; }
+      #calendarTable .col-actual, #calendarTable .col-forecast, #calendarTable .col-previous { width: 70px; }
+      #calendarTable .col-surprise { width: 100px; }
+      #calendarTable .col-interpretation { width: 170px; }
+      #calendarTable .col-market { width: 100px; }
+      a { color:#111; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="badge">Economic News Monitoring</span>
+      <h1>What Happened in the Last 24 Hours</h1>
+      <p class="subtitle">Inflasi AS dan lonjakan minyak akibat risiko Hormuz menjadi penggerak dominan, menekan yield global, dollar, EM FX, dan pasar SBN. Sentimen risk-off tidak merata karena tema AI/semikonduktor masih menopang sebagian aliran ke Asia.</p>
+      <div class="hero-meta">
+        <div class="meta-card"><small>Coverage period</small><strong>12 May 2026 06:01 WIB – 13 May 2026 06:00 WIB</strong></div>
+        <div class="meta-card"><small>Generated</small><strong>13 May 2026 07:23 WIB</strong></div>
+        <div class="meta-card"><small>Scope</small><strong>Global full coverage; Indonesia relevance emphasized</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <button class="active" data-jump="summary">Executive Summary</button>
+      <button data-jump="pulse">Global Market Pulse</button>
+      <button data-jump="news">News View</button>
+      <button data-jump="regions">Country / Region View</button>
+      <button data-jump="calendar">Data View</button>
+      <button data-jump="risk">Risk Heatmap</button>
+      <button data-jump="indonesia">Indonesia Relevance</button>
+      <button data-jump="watchlist">Watchlist</button>
+      <button data-jump="methodology">Sources & Methodology</button>
+      <button class="btn gold" onclick="window.print()">Print to PDF</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="summary">
+      <div class="section-title">
+        <div>
+          <h2>Executive Summary</h2>
+          <p>5–7 driver utama yang paling relevan untuk pasar keuangan dan Indonesia.</p>
+        </div>
+      </div>
+      <div class="card">
+        <ul class="summary-list" id="summaryList"></ul>
+      </div>
+    </section>
+
+    <section id="pulse">
+      <div class="section-title">
+        <div>
+          <h2>Global Market Pulse</h2>
+          <p>Klasifikasi cepat atas sentimen, driver, dan kanal pasar.</p>
+        </div>
+      </div>
+      <div class="grid cols-4">
+        <div class="card pulse-card">
+          <span class="pulse-label">Global risk sentiment</span>
+          <span class="pulse-value">Risk-off selective</span>
+          <p>Tekanan utama pada bonds, EM FX, dan cyclicals; namun APAC tech/AI masih menarik inflow.</p>
+        </div>
+        <div class="card pulse-card">
+          <span class="pulse-label">Dominant driver</span>
+          <span class="pulse-value">Inflation + Energy shock</span>
+          <p>Oil shock dari Hormuz memperbesar tekanan CPI, Fed pricing, dan term premium global.</p>
+        </div>
+        <div class="card pulse-card">
+          <span class="pulse-label">Indonesia impact</span>
+          <span class="pulse-value">Adverse / Cautious</span>
+          <p>Rupiah dan SBN rentan pada kombinasi Brent tinggi, UST naik, dan USD lebih kuat.</p>
+        </div>
+        <div class="card pulse-card">
+          <span class="pulse-label">Market channels affected</span>
+          <div class="pill-row">
+            <span class="pill">USD</span><span class="pill">UST yield</span><span class="pill">Oil</span><span class="pill">Gold</span><span class="pill">EM FX</span><span class="pill">Capital flow</span><span class="pill">CDS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="section-title">
+        <div>
+          <h2>High Impact News Cards</h2>
+          <p>Gunakan filter, search, dan expand/collapse untuk membaca detail.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Search headline, source, tag, or indicator...">
+        <select id="countryFilter"><option value="All">All countries / regions</option></select>
+        <select id="impactFilter"><option value="All">All impact</option><option value="High">High</option><option value="Medium">Medium</option></select>
+      </div>
+      <div class="grid cols-3" id="newsGrid"></div>
+    </section>
+
+    <section id="regions">
+      <div class="section-title">
+        <div>
+          <h2>Country / Region View</h2>
+          <p>Ringkasan per wilayah sesuai cakupan global penuh.</p>
+        </div>
+      </div>
+      <div class="country-tabs" id="countryTabs"></div>
+      <div class="card country-panel" id="countryPanel"></div>
+    </section>
+
+    <section id="calendar">
+      <div class="section-title">
+        <div>
+          <h2>Economic Calendar Releases</h2>
+          <p>Medium/high impact dan rilis yang memiliki actual dalam window coverage.</p>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table id="calendarTable">
+          <colgroup>
+            <col class="col-time">
+            <col class="col-country">
+            <col class="col-indicator">
+            <col class="col-impact">
+            <col class="col-actual">
+            <col class="col-forecast">
+            <col class="col-previous">
+            <col class="col-surprise">
+            <col class="col-interpretation">
+            <col class="col-market">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="col-time" data-sort="time">Time</th>
+              <th class="col-country" data-sort="country">Country</th>
+              <th class="col-indicator" data-sort="indicator">Indicator</th>
+              <th class="col-impact" data-sort="impact">Impact</th>
+              <th class="col-actual" data-sort="actual">Actual</th>
+              <th class="col-forecast" data-sort="forecast">Forecast</th>
+              <th class="col-previous" data-sort="previous">Previous</th>
+              <th class="col-surprise" data-sort="surprise">Surprise</th>
+              <th class="col-interpretation" data-sort="interpretation">Market interpretation</th>
+              <th class="col-market" data-sort="channel">Channel</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="table-legend">H = High impact; M = Medium impact. Surprise dinilai secara kontekstual berdasarkan karakter indikator.</div>
+      <div class="print-note" style="margin-top:14px;">
+        Catatan: waktu TradingCharts/RTTNews semula berbasis U.S. Eastern Time dan dikonversi ke WIB. Rilis Asia Pasifik yang jatuh setelah 13 May 2026 06:00 WIB dipindahkan ke Watchlist.
+      </div>
+    </section>
+
+    <section id="risk">
+      <div class="section-title">
+        <div>
+          <h2>Risk Heatmap</h2>
+          <p>Skor 1–5: semakin tinggi berarti risiko/spillover semakin besar.</p>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="heatmap-table" id="heatmapTable">
+          <thead>
+            <tr>
+              <th>Country / Region</th>
+              <th>Inflation / Rates</th>
+              <th>Growth Slowdown</th>
+              <th>Fiscal / Debt</th>
+              <th>Geopolitical</th>
+              <th>Market Volatility</th>
+              <th>Spillover to Indonesia</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="indonesia">
+      <div class="section-title">
+        <div>
+          <h2>Why This Matters for Indonesia and Investors</h2>
+          <p>Implikasi terhadap SBN, rupiah, APBN, IHSG, dan capital flow.</p>
+        </div>
+      </div>
+      <div class="grid cols-3" id="indonesiaGrid"></div>
+    </section>
+
+    <section id="watchlist">
+      <div class="section-title">
+        <div>
+          <h2>Watchlist for Next Period</h2>
+          <p>Agenda dan risiko yang perlu dipantau setelah 13 May 2026 06:00 WIB.</p>
+        </div>
+      </div>
+      <div class="grid cols-2" id="watchGrid"></div>
+    </section>
+
+    <section id="methodology">
+      <div class="section-title">
+        <div>
+          <h2>Source and Methodology</h2>
+          <p>Ringkasan metode kurasi, klasifikasi, dan keterbatasan.</p>
+        </div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--primary-dark)">Methodology</h3>
+          <ul class="summary-list" id="methodList"></ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--primary-dark)">Key Sources</h3>
+          <ol class="source-list" id="sourceList"></ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Analytical monitoring dashboard. Not investment advice. Data and news are subject to revision.
+  </footer>
+
+  <script>
+    const NEWS = [{"id": "n1", "country": "United States", "region": "US", "impact": "High", "headline": "U.S. CPI April naik 3,8% yoy; tekanan energi memperketat ekspektasi suku bunga", "source": "U.S. BLS; Reuters", "url": "https://www.bls.gov/news.release/cpi.nr0.htm", "published": "12 May 2026 19:30 WIB", "summary": "CPI-U naik 0,6% mom dan 3,8% yoy; energi naik 3,8% mom dan menyumbang lebih dari 40% kenaikan bulanan. Reuters mencatat reaksi awal berupa saham AS melemah, yield Treasury naik, dan dollar menguat.", "market": "Negatif untuk duration bonds; memperkuat skenario Fed higher-for-longer dan memperbesar tekanan imported tightening ke EM.", "implication": "Untuk Indonesia, kombinasi UST yield tinggi dan USD lebih kuat berisiko menekan rupiah, yield SBN, dan appetite investor asing pada obligasi lokal.", "tags": ["Inflation", "US rates", "Monetary policy", "EM risk"]}, {"id": "n2", "country": "Global / Middle East", "region": "Other", "impact": "High", "headline": "Brent naik ke USD107,77/barel karena harapan damai U.S.-Iran memudar", "source": "Reuters", "url": "https://www.reuters.com/business/energy/oil-prices-rise-fragile-us-iran-talks-sustain-supply-worries-2026-05-12/", "published": "12 May 2026 23:00 WIB", "summary": "Brent naik 3,42% ke USD107,77 dan WTI naik 4,19% ke USD102,18. EIA mengasumsikan Strait of Hormuz efektif tertutup hingga akhir Mei, sehingga pasokan minyak dan gas Timur Tengah terdampak lebih lama.", "market": "Shock energi memperburuk inflasi global, menekan negara importir minyak, dan menaikkan premia risiko geopolitik.", "implication": "Untuk APBN, risiko berada pada ICP, subsidi/kompensasi energi, defisit transaksi berjalan, dan tekanan rupiah yang dapat merembet ke biaya pembiayaan.", "tags": ["Commodity", "Geopolitics", "Energy", "Inflation"]}, {"id": "n3", "country": "Global Markets", "region": "Other", "impact": "High", "headline": "Saham global melemah, dollar menguat, dan yield naik setelah CPI AS serta reli minyak", "source": "Reuters", "url": "https://www.reuters.com/world/china/global-markets-pix-2026-05-12/", "published": "13 May 2026 04:00 WIB", "summary": "Reuters melaporkan Wall Street melemah, dollar naik, inflasi AS terdorong harga bensin, dan yield obligasi naik ketika peluang penyelesaian konflik Middle East menurun.", "market": "Kondisi pasar berubah ke risk-off selektif: energi naik, fixed income tertekan, dan aset EM lebih rentan terhadap outflow.", "implication": "Investor SBN perlu memantau korelasi UST-IDR-SBN, sementara investor saham domestik perlu mencermati sektor importir energi dan consumer discretionary.", "tags": ["Financial stability", "US rates", "EM risk", "Commodity"]}, {"id": "n4", "country": "United States", "region": "US", "impact": "Medium", "headline": "Fed Goolsbee menilai data inflasi terbaru mengecewakan, terutama komponen jasa", "source": "Reuters", "url": "https://www.reuters.com/markets/us/feds-goolsbee-says-hes-disappointed-by-latest-inflation-read-2026-05-12/", "published": "13 May 2026 00:35 WIB", "summary": "Goolsbee menyebut inflasi bergerak ke arah yang salah dan kekhawatiran utama muncul pada sisi jasa, bukan hanya minyak atau tarif.", "market": "Komentar ini mengurangi ruang narasi dovish jangka pendek dan memperkuat sensitivitas pasar terhadap data PCE dan jasa.", "implication": "Higher-for-longer Fed rate menjaga tekanan yield global; ruang relaksasi moneter BI juga semakin terbatas jika rupiah terus tertekan.", "tags": ["Monetary policy", "Inflation", "US rates"]}, {"id": "n5", "country": "Germany", "region": "Germany", "impact": "Medium", "headline": "ZEW Jerman membaik ke -10,2, tetapi outlook tetap negatif", "source": "Reuters", "url": "https://www.reuters.com/business/retail-consumer/german-investor-morale-rises-unexpectedly-may-zew-finds-2026-05-12/", "published": "12 May 2026 17:00 WIB", "summary": "ZEW expectations naik dari -17,2 menjadi -10,2, lebih baik dari ekspektasi -19,8; tetapi current conditions melemah ke -77,8 dan perang Iran masih menekan ekonomi Jerman.", "market": "Sinyal sentimen sedikit membaik, tetapi risiko energi dan permintaan industri tetap menahan Bund/euro area risk appetite.", "implication": "Dampaknya ke Indonesia tidak langsung, tetapi menjaga kewaspadaan pada demand Eropa, harga energi, dan sentimen global manufaktur.", "tags": ["Growth", "Euro Area", "Commodity"]}, {"id": "n6", "country": "United Kingdom", "region": "UK", "impact": "High", "headline": "Gilt UK melonjak di tengah ketidakpastian politik dan kekhawatiran fiskal", "source": "The Guardian", "url": "https://www.theguardian.com/business/live/2026/may/12/uk-bond-yields-borrowing-costs-pound-falls-oil-inflation-live-updates", "published": "12 May 2026 malam WIB", "summary": "Yield gilt 10 tahun sempat mencapai sekitar 5,13%, tertinggi sejak 2008; 30 tahun mencapai sekitar 5,81%, tertinggi sejak 1998, dipicu drama politik dan tekanan biaya energi.", "market": "Fiscal-risk repricing di pasar developed markets memperluas perhatian investor pada kredibilitas fiskal dan supply obligasi.", "implication": "Bagi sovereign debt management, episode UK adalah pengingat bahwa komunikasi fiskal dan disiplin pembiayaan tetap krusial ketika yield global naik.", "tags": ["Fiscal risk", "Financial stability", "Global bond yield"]}, {"id": "n7", "country": "United States", "region": "US", "impact": "Medium", "headline": "Surplus anggaran AS April menyusut menjadi USD215 miliar", "source": "Reuters", "url": "https://www.reuters.com/markets/asia/us-posts-smaller-215-billion-budget-surplus-april-tax-refunds-grow-2026-05-12/", "published": "13 May 2026 01:04 WIB", "summary": "Surplus April turun USD43 miliar atau 17% yoy karena refund pajak lebih besar dan belanja meningkat, termasuk biaya bunga dan militer terkait perang Iran.", "market": "Kombinasi biaya bunga tinggi dan belanja konflik menambah sorotan pada supply Treasury serta fiscal risk premium.", "implication": "Supply-risk Treasury yang lebih mahal dapat memperkuat tekanan yield global dan menjadi benchmark negatif untuk SBN tenor panjang.", "tags": ["Fiscal risk", "US rates", "Sovereign risk"]}, {"id": "n8", "country": "China / United States", "region": "China", "impact": "Medium", "headline": "AS dan China disebut sepakat menolak pungutan toll di Strait of Hormuz", "source": "Reuters", "url": "https://www.reuters.com/world/china/china-us-agree-opposing-hormuz-tolls-state-department-says-2026-05-12/", "published": "13 May 2026 01:56 WIB", "summary": "Menjelang pertemuan Trump-Xi, State Department menyebut pejabat AS dan China sepakat bahwa tidak ada negara yang boleh mengenakan toll di jalur air internasional seperti Hormuz.", "market": "Ada potensi common ground diplomatik, tetapi resolusi masih rapuh karena posisi China terhadap Iran dan PBB tetap kompleks.", "implication": "Jika koordinasi membaik, premi risiko minyak bisa turun; jika gagal, tekanan energi dan EM FX dapat berlanjut.", "tags": ["Geopolitics", "China risk", "Energy", "Trade"]}, {"id": "n9", "country": "Asia Pacific", "region": "Asia Pacific", "impact": "Medium", "headline": "Hedge funds mencatat pembelian mingguan terbesar dalam satu dekade di Korea, Jepang, Taiwan", "source": "Reuters", "url": "https://www.reuters.com/markets/wealth/hedge-funds-record-decade-high-weekly-buying-korea-japan-taiwan-equities-morgan-2026-05-12/", "published": "12 May 2026 10:14 WIB", "summary": "Morgan Stanley mencatat pembelian hedge funds berfokus pada semikonduktor dan hardware Asia; eksposur bersih ke Jepang, Korea Selatan, dan Taiwan mencapai titik tertinggi sejak pelacakan 2010.", "market": "Risk appetite tidak sepenuhnya memburuk; investor tetap mencari tema AI/semiconductor di Asia meskipun energi dan geopolitik menekan pasar luas.", "implication": "Dampak ke Indonesia lebih relatif: aliran ke Asia bisa tetap ada, tetapi Indonesia harus bersaing dengan tema pertumbuhan struktural yang lebih kuat di North Asia tech.", "tags": ["Equity", "Asia Pacific", "Capital flow", "AI"]}, {"id": "n10", "country": "India / EM Asia", "region": "Other", "impact": "High", "headline": "Rupee India rekor terendah; rupiah dan peso ikut disebut terdampak berat oleh shock minyak", "source": "Reuters", "url": "https://www.reuters.com/world/india/rupee-hits-record-low-fraying-us-iran-ceasefire-keeps-oil-prices-boil-2026-05-12/", "published": "12 May 2026 10:36 WIB", "summary": "Rupee jatuh ke 95,7375 per USD. Reuters mencatat mata uang importir minyak seperti INR, IDR, dan PHP menjadi yang paling terdampak setelah Brent naik hampir 50% sejak perang Iran.", "market": "Tekanan imported inflation, current account, dan outflow membuat EM FX lebih defensif.", "implication": "Bagi Indonesia, risiko langsung adalah pelemahan rupiah, kenaikan yield SBN, dan meningkatnya kebutuhan stabilisasi pasar valas/SBN.", "tags": ["EM risk", "Capital flow", "FX", "Energy"]}, {"id": "n11", "country": "Indonesia", "region": "Indonesia", "impact": "High", "headline": "Yield SBN 10 tahun Indonesia naik ke 6,74%; rupiah menyentuh rekor rendah", "source": "Trading Economics", "url": "https://tradingeconomics.com/indonesia/government-bond-yield", "published": "12 May 2026 14:12 WIB", "summary": "Trading Economics mencatat yield 10Y Indonesia naik ke 6,74%, mengikuti kenaikan UST menjelang CPI AS; rupiah yang melemah ke rekor rendah menambah tekanan pada obligasi domestik.", "market": "Pasar SBN menghadapi kombinasi UST repricing, FX pressure, dan kekhawatiran aliran modal asing.", "implication": "Monitoring pembiayaan perlu menekankan tenor mix, auction sizing, komunikasi supply, dan potensi koordinasi stabilisasi pasar sekunder.", "tags": ["SBN", "Rupiah", "Fiscal risk", "Capital flow"]}, {"id": "n12", "country": "Gold / Commodities", "region": "Other", "impact": "Medium", "headline": "Gold turun saat reli minyak memperbesar ketidakpastian suku bunga", "source": "Reuters", "url": "https://www.reuters.com/world/china/gold-rises-with-uschina-talks-mideast-conflict-focus-2026-05-12/", "published": "12 May 2026 malam WIB", "summary": "Spot gold turun 1,2% ke USD4.678,49/oz karena lonjakan oil memperkuat kekhawatiran inflasi dan suku bunga, meski risiko geopolitik tetap tinggi.", "market": "Safe-haven tidak otomatis menguat ketika shock energi meningkatkan expected rates; opportunity cost memegang emas meningkat.", "implication": "Untuk Indonesia, harga emas dan energi yang tinggi dapat menjaga dukungan sebagian komoditas tetapi tetap memperburuk tekanan imported inflation dan subsidi.", "tags": ["Commodity", "Gold", "US rates", "Geopolitics"]}];
+    const CALENDAR = [{"time": "12 May 2026 13:00", "country": "Germany", "indicator": "CPI (YoY) Apr Final", "impact": "High", "actual": "2.9%", "forecast": "2.9%", "previous": "2.7%", "surprise": "Inline terhadap forecast; naik dari bulan sebelumnya", "interpretation": "Inflasi Jerman tetap di atas 2% dan dipengaruhi tekanan energi. Sinyal ini menahan ruang pelonggaran ECB bila energi tetap mahal.", "channel": "Bund yield; EUR; global rates", "source": "TradingCharts / Reuters ZEW context"}, {"time": "12 May 2026 13:00", "country": "Germany", "indicator": "CPI EU Harmonised (YoY) Apr Final", "impact": "Medium", "actual": "2.9%", "forecast": "not available", "previous": "2.9%", "surprise": "Inline/stable", "interpretation": "Data final mengonfirmasi tekanan harga tetap elevated meski tidak ada akselerasi baru pada harmonised CPI.", "channel": "Euro Area inflation; ECB repricing", "source": "TradingCharts"}, {"time": "12 May 2026 13:30", "country": "Switzerland", "indicator": "Producer & Import Prices (MoM) Apr", "impact": "Medium", "actual": "0.8%", "forecast": "not available", "previous": "0.2%", "surprise": "Positive price pressure", "interpretation": "Kenaikan harga produsen/impor menunjukkan risiko pass-through input cost, meskipun level yoy masih negatif pada beberapa ukuran.", "channel": "CHF; SNB outlook; imported inflation", "source": "RTTNews / TradingCharts"}, {"time": "12 May 2026 15:00", "country": "Italy", "indicator": "Industrial Production (MoM) Mar", "impact": "Medium", "actual": "0.7%", "forecast": "-0.2%", "previous": "0.2% (R)", "surprise": "Positive surprise", "interpretation": "Produksi industri lebih kuat dari ekspektasi, sedikit mengurangi narasi pelemahan manufaktur Italia/Eropa Selatan.", "channel": "Euro Area growth; equity cyclicals", "source": "RTTNews / TradingCharts"}, {"time": "12 May 2026 15:00", "country": "Italy", "indicator": "Industrial Production (YoY) Mar", "impact": "Medium", "actual": "1.5%", "forecast": "0.2%", "previous": "0.4% (R)", "surprise": "Positive surprise", "interpretation": "Perbaikan yoy cukup jelas, tetapi sustainability masih bergantung pada energi dan permintaan eksternal.", "channel": "Euro Area growth; EUR; risk sentiment", "source": "RTTNews / TradingCharts"}, {"time": "12 May 2026 16:00", "country": "Germany", "indicator": "ZEW Economic Sentiment May", "impact": "Medium", "actual": "-10.2", "forecast": "-21.0", "previous": "-17.2", "surprise": "Positive surprise, tetapi masih negatif", "interpretation": "Ekspektasi investor membaik dari level tertekan, namun kondisi saat ini tetap sangat lemah dan perang Iran menahan pemulihan.", "channel": "DAX; Bund yield; EUR", "source": "Reuters / TradingCharts"}, {"time": "12 May 2026 16:00", "country": "Euro Area", "indicator": "ZEW Economic Sentiment May", "impact": "Medium", "actual": "-9.1", "forecast": "not available", "previous": "-20.4", "surprise": "Positive improvement", "interpretation": "Sentimen euro area membaik tetapi tetap rentan pada harga energi dan spillover geopolitik.", "channel": "EUR; Euro stocks; Bund/BTP spread", "source": "TradingCharts"}, {"time": "12 May 2026 19:30", "country": "United States", "indicator": "CPI (MoM) Apr", "impact": "High", "actual": "0.6%", "forecast": "0.6%", "previous": "0.9%", "surprise": "Inline monthly, tetap tinggi", "interpretation": "Walau sesuai forecast, kenaikan bulanan masih kuat dan energi menyumbang porsi besar dari kenaikan total.", "channel": "UST yield; USD; equities; EM FX", "source": "BLS / Reuters"}, {"time": "12 May 2026 19:30", "country": "United States", "indicator": "CPI (YoY) Apr", "impact": "High", "actual": "3.8%", "forecast": "3.7%", "previous": "3.3%", "surprise": "Negative for bonds / upside inflation surprise", "interpretation": "Akselerasi yoy memperkuat kekhawatiran inflasi energi dan menekan ekspektasi pemangkasan suku bunga Fed.", "channel": "UST yield; USD; global bond yield", "source": "BLS / Reuters"}, {"time": "12 May 2026 19:30", "country": "United States", "indicator": "Core CPI (MoM) Apr", "impact": "High", "actual": "0.4%", "forecast": "0.33%", "previous": "0.2%", "surprise": "Negative for bonds", "interpretation": "Core yang meningkat menunjukkan tekanan tidak hanya berasal dari energi; services menjadi area perhatian Fed.", "channel": "Fed pricing; UST 2Y; Nasdaq", "source": "BLS / TradingCharts"}, {"time": "12 May 2026 19:30", "country": "United States", "indicator": "Core CPI (YoY) Apr", "impact": "High", "actual": "2.8%", "forecast": "2.7%", "previous": "2.6%", "surprise": "Negative for bonds", "interpretation": "Core yoy naik dan mengurangi ruang narasi disinflasi cepat.", "channel": "Fed path; USD; EM capital flow", "source": "BLS / TradingCharts"}, {"time": "12 May 2026 21:30", "country": "Australia", "indicator": "CB Leading Index Mar", "impact": "Medium", "actual": "-0.6%", "forecast": "not available", "previous": "1.0% (R)", "surprise": "Negative growth signal", "interpretation": "Leading index melemah, tetapi rilis domestik Australia yang lebih market-moving jatuh setelah window coverage.", "channel": "AUD; Australia growth outlook", "source": "TradingCharts"}, {"time": "13 May 2026 01:00", "country": "United States", "indicator": "Monthly Budget Statement Apr", "impact": "Medium", "actual": "USD 215B surplus", "forecast": "not available", "previous": "USD 258B surplus yoy comparison", "surprise": "Smaller surplus vs year earlier", "interpretation": "Refund pajak lebih besar, biaya bunga dan belanja militer menambah perhatian terhadap lintasan fiskal AS.", "channel": "Treasury supply; UST term premium", "source": "Reuters / Treasury context"}, {"time": "13 May 2026 04:00", "country": "United States", "indicator": "10-Year Treasury Note Auction", "impact": "High", "actual": "4.468% high yield; bid-to-cover 2.40", "forecast": "not available", "previous": "4.282%; bid-to-cover 2.43", "surprise": "Weaker demand / higher yield", "interpretation": "Demand di bawah rata-rata memperkuat tekanan pada kurva UST dan benchmark yield global.", "channel": "UST 10Y; global duration; SBN benchmark", "source": "RTTNews / U.S. Treasury calendar"}];
+    const COUNTRIES = [{"name": "US", "keyNews": "CPI April meningkat, Fed rhetoric lebih hati-hati, surplus fiskal April menyusut, dan auction 10Y menunjukkan demand di bawah rata-rata.", "data": "CPI, core CPI, monthly budget statement, 10Y note auction.", "interpretation": "Dominan hawkish/rates pressure. Yield dan USD menjadi kanal utama spillover ke EM.", "watch": "PPI, retail sales, FOMC minutes, komentar Fed, dan UST auctions berikutnya."}, {"name": "China", "keyNews": "AS-China menemukan titik temu terbatas soal penolakan toll Hormuz; Trump-Xi summit menjadi agenda utama.", "data": "Tidak ada rilis high-impact China yang terverifikasi di dalam window.", "interpretation": "China relevan sebagai konsumen minyak Iran dan kanal diplomatik ke Hormuz; outcome summit dapat menggerakkan minyak dan risk appetite.", "watch": "Trump-Xi meeting, sanksi terkait minyak Iran, data aktivitas China, dan stimulus properti/kredit."}, {"name": "Japan", "keyNews": "Tema APAC risk appetite didorong pembelian hedge funds ke saham Jepang/Korea/Taiwan, khususnya semikonduktor.", "data": "Japan BoP/current account rilis sekitar 06:50 WIB, berada setelah cut-off 06:00 WIB sehingga dimasukkan ke watchlist.", "interpretation": "Pasar Jepang relatif ditopang tema AI, tetapi JPY tetap sensitif terhadap USD dan UST yield.", "watch": "Current account, Eco Watchers Survey, GDP final, dan risiko intervensi yen."}, {"name": "UK", "keyNews": "Gilt yields melonjak di tengah tekanan politik dan kekhawatiran fiscal credibility.", "data": "Tidak ada rilis data makro utama UK yang masuk window; kalender UK utama jatuh setelah periode.", "interpretation": "Episode UK menunjukkan fiscal risk premium dapat naik cepat bahkan pada DM ketika kredibilitas kebijakan dipertanyakan.", "watch": "UK GDP/labour data, Bank of England repricing, dan perkembangan kepemimpinan politik."}, {"name": "Euro Area", "keyNews": "Sentimen ZEW euro area membaik tetapi tetap negatif; Italia IP lebih kuat dari ekspektasi.", "data": "Euro Area/Germany ZEW, Italy Industrial Production.", "interpretation": "Growth surprise positif terbatas, namun shock energi tetap menahan outlook manufaktur dan mendorong inflation risk.", "watch": "ECB communications, energy prices, Bund-BTP spread, dan final CPI/GDP nasional."}, {"name": "Germany", "keyNews": "ZEW membaik ke -10,2 tetapi current conditions melemah; CPI final tetap 2,9% yoy.", "data": "CPI final, ZEW expectations/current situation.", "interpretation": "Jerman belum masuk fase pemulihan meyakinkan; masalah energi dan industri masih dominan.", "watch": "Industrial orders/production berikutnya, labour market, dan gas/oil price pass-through."}, {"name": "France", "keyNews": "Tidak ada berita/data high-impact Prancis yang terverifikasi di window ini.", "data": "Data CPI/GDP Prancis berikutnya berada di luar window atau belum memiliki actual terverifikasi.", "interpretation": "Risiko utama tetap berasal dari spillover euro area, energi, dan ECB pricing.", "watch": "Final CPI, fiscal news, OAT-Bund spread, dan data pertumbuhan."}, {"name": "Italy", "keyNews": "Industrial production Maret lebih baik dari perkiraan.", "data": "IP MoM 0,7%, IP YoY 1,5%.", "interpretation": "Positif untuk growth, tetapi masih rentan karena biaya energi dan dinamika spread BTP.", "watch": "BTP-Bund spread, fiscal headlines, dan data produksi berikutnya."}, {"name": "Indonesia", "keyNews": "Yield SBN 10Y naik ke 6,74%; rupiah berada dalam tekanan record-low karena UST, USD, dan oil shock.", "data": "Tidak ada rilis domestik utama dalam window; indikator pasar SBN/rupiah paling relevan.", "interpretation": "Kanal utama adalah UST yield, USD, minyak, EM FX, dan capital flow. Kondisi menuntut monitoring pembiayaan yang ketat.", "watch": "Auction SBN, inflow/outflow asing, BI intervention posture, SRBI, APBN energy sensitivity."}, {"name": "Australia", "keyNews": "Budget Australia menyoroti risiko inflasi dan pertumbuhan akibat skenario shock minyak; CB Leading Index melemah.", "data": "CB Leading Index -0,6%; WPI Q1 rilis setelah window.", "interpretation": "RBA pricing sensitif pada inflasi energi; fiscal support perlu diseimbangkan dengan disinflasi.", "watch": "Wage Price Index, RBA communication, oil shock scenario, dan fiscal implementation."}, {"name": "New Zealand", "keyNews": "Tidak ada rilis market-moving dalam window.", "data": "Tidak tersedia actual medium/high impact dalam window coverage.", "interpretation": "NZD tetap akan mengikuti sentimen USD, energi, dan RBNZ outlook.", "watch": "Food prices, retail sales, RBNZ rate decision, dan business confidence."}, {"name": "Switzerland", "keyNews": "Producer/import prices naik secara bulanan, tetapi tekanan yoy beberapa indikator masih negatif.", "data": "PPI, Producer & Import Prices.", "interpretation": "SNB relatif memiliki tekanan inflasi lebih rendah, tetapi import price shock tetap perlu dipantau.", "watch": "CHF safe-haven demand, CPI berikutnya, dan SNB communication."}, {"name": "Other", "keyNews": "India menjadi contoh paling jelas tekanan oil shock pada EM Asia; rupee rekor rendah dan rupiah/peso ikut disebut terdampak berat.", "data": "Tidak semua data negara lain dimasukkan karena fokus pada medium/high impact dan relevansi Indonesia.", "interpretation": "Oil-importing EM rentan pada current account, imported inflation, dan outflow.", "watch": "India policy support, Gulf market stress, EM fund flows, dan harga minyak."}];
+    const HEATMAP = [{"country": "United States", "inflation": 5, "growth": 3, "fiscal": 4, "geo": 4, "market": 4, "spillover": 5, "note": "CPI, Fed, UST, dan fiscal supply menjadi pusat tekanan global."}, {"country": "China", "inflation": 3, "growth": 3, "fiscal": 2, "geo": 4, "market": 3, "spillover": 4, "note": "Kanal utama: Hormuz diplomacy, oil imports, dan Trump-Xi summit."}, {"country": "Japan", "inflation": 3, "growth": 3, "fiscal": 3, "geo": 2, "market": 3, "spillover": 3, "note": "Tema AI mendukung ekuitas; JPY tetap sensitif UST/USD."}, {"country": "United Kingdom", "inflation": 4, "growth": 3, "fiscal": 5, "geo": 2, "market": 5, "spillover": 4, "note": "Gilt stress menunjukkan fiscal credibility premium naik cepat."}, {"country": "Euro Area", "inflation": 4, "growth": 4, "fiscal": 3, "geo": 3, "market": 3, "spillover": 4, "note": "Energi dan manufaktur menekan outlook, meski ZEW membaik."}, {"country": "Germany", "inflation": 4, "growth": 4, "fiscal": 3, "geo": 3, "market": 3, "spillover": 4, "note": "CPI 2,9% dan ZEW negatif; industri masih rapuh."}, {"country": "France", "inflation": 3, "growth": 3, "fiscal": 3, "geo": 2, "market": 2, "spillover": 2, "note": "Tidak ada rilis high-impact dalam window; spillover dari ECB/energi."}, {"country": "Italy", "inflation": 3, "growth": 3, "fiscal": 4, "geo": 2, "market": 2, "spillover": 3, "note": "IP positif, tetapi spread/fiscal risk tetap relevan."}, {"country": "Indonesia", "inflation": 4, "growth": 3, "fiscal": 4, "geo": 3, "market": 5, "spillover": 5, "note": "Rupiah dan SBN langsung terkena kombinasi UST, USD, dan minyak."}, {"country": "Australia", "inflation": 4, "growth": 3, "fiscal": 3, "geo": 2, "market": 3, "spillover": 3, "note": "Budget menyoroti risiko oil shock terhadap inflasi dan growth."}, {"country": "New Zealand", "inflation": 3, "growth": 3, "fiscal": 3, "geo": 2, "market": 2, "spillover": 2, "note": "Risiko eksternal lebih dominan daripada data domestik window ini."}, {"country": "Switzerland", "inflation": 2, "growth": 2, "fiscal": 2, "geo": 2, "market": 2, "spillover": 2, "note": "PPI naik bulanan, namun tekanan relatif rendah."}, {"country": "India / EM Asia", "inflation": 4, "growth": 4, "fiscal": 3, "geo": 3, "market": 5, "spillover": 4, "note": "Oil shock menekan INR, IDR, PHP dan current account outlook."}, {"country": "Middle East / Gulf", "inflation": 5, "growth": 3, "fiscal": 4, "geo": 5, "market": 5, "spillover": 5, "note": "Hormuz adalah pusat shock energi dan risk premium global."}];
+    const WATCHLIST = [{"item": "U.S. PPI April", "why": "Konfirmasi apakah tekanan CPI menyebar ke level produsen.", "market": "UST, USD, equities, EM FX"}, {"item": "U.S. Retail Sales dan Jobless Claims", "why": "Menguji ketahanan konsumsi setelah shock bensin/energi.", "market": "Growth sentiment, Fed path"}, {"item": "Trump-Xi meeting di Beijing", "why": "Dapat memengaruhi ekspektasi penyelesaian Hormuz, sanksi minyak Iran, dan trade risk.", "market": "Oil, CNH, Asia equities"}, {"item": "Australia Wage Price Index Q1", "why": "Rilis beberapa menit setelah window; penting untuk RBA pricing.", "market": "AUD, Australia rates"}, {"item": "Japan Current Account dan Eco Watchers", "why": "Rilis setelah cut-off, relevan untuk JPY dan external balance Jepang.", "market": "JPY, JGB, Nikkei"}, {"item": "SBN auctions dan pasar sekunder Indonesia", "why": "Uji demand investor domestik/asing saat UST dan rupiah tertekan.", "market": "SBN yield, rupiah, capital flow"}, {"item": "Harga Brent dan status Strait of Hormuz", "why": "Driver utama imported inflation, subsidi energi, dan risk appetite global.", "market": "Oil, gold, EM FX, CDS"}, {"item": "UK political/fiscal headlines", "why": "Gilt shock dapat menjadi template repricing fiscal credibility di pasar obligasi global.", "market": "GBP, Gilts, global term premium"}];
+    const SUMMARY = ["Driver utama periode ini adalah kombinasi CPI AS yang naik, reli minyak akibat risiko Hormuz, dan repricing yield global.", "Sentimen pasar cenderung risk-off selektif: saham AS melemah, dollar menguat, UST naik, tetapi tema AI/semiconductor masih menarik inflow ke sebagian pasar Asia.", "Oil shock menjadi kanal risiko paling kuat bagi Indonesia karena memukul rupiah, imported inflation, biaya energi APBN, dan yield SBN.", "Yield SBN 10Y Indonesia naik ke 6,74%, mencerminkan tekanan eksternal dari UST dan pelemahan rupiah.", "Fiscal credibility menjadi tema lintas negara: UK mengalami lonjakan gilt yield, sementara surplus anggaran AS mengecil dengan biaya bunga dan belanja militer meningkat.", "Data Eropa relatif campuran: ZEW Jerman membaik tetapi tetap negatif; industrial production Italia menguat, namun energi masih menekan prospek manufaktur.", "Rilis Asia Pasifik penting yang jatuh setelah 06.00 WIB tidak dimasukkan ke data utama dan dicatat sebagai watchlist."];
+    const INDONESIA = [{"title": "UST yield dan global bond yield", "body": "CPI AS dan auction 10Y yang kurang kuat menaikkan benchmark global. Spread SBN perlu dilihat bersama pergerakan UST, bukan secara isolatif."}, {"title": "Yield SBN dan auction strategy", "body": "Ketika rupiah melemah dan UST naik, investor menuntut kompensasi yield lebih tinggi. Auction sizing, tenor composition, dan komunikasi supply menjadi krusial."}, {"title": "Rupiah dan capital flow", "body": "Shock minyak menekan mata uang importir energi. IDR rentan jika Brent bertahan di atas USD100 dan USD tetap kuat."}, {"title": "APBN dan pembiayaan utang", "body": "Risiko berada pada ICP, subsidi/kompensasi energi, potensi pelebaran defisit, serta biaya refinancing jika yield curve domestik bergeser naik."}, {"title": "IHSG dan investor saham", "body": "Sektor energi/komoditas dapat relatif terbantu, tetapi sektor konsumsi, transportasi, dan importir energi menghadapi margin pressure."}, {"title": "Sovereign risk premium", "body": "Jika tekanan rupiah, harga minyak, dan yield global berlangsung lama, risk premium Indonesia berpotensi naik meski fundamental domestik masih menjadi penahan."}, {"title": "Monitoring priority", "body": "Pantau Brent, DXY, UST 10Y/2Y, CDS Indonesia, foreign flow SBN, BI liquidity instruments, dan bid-to-cover lelang SBN."}];
+    const SOURCES = {"BLS CPI": "https://www.bls.gov/news.release/cpi.nr0.htm", "Reuters CPI": "https://www.reuters.com/business/view-april-cpi-rises-more-than-expected-bond-yields-climb-2026-05-12/", "Reuters Global Markets": "https://www.reuters.com/world/china/global-markets-pix-2026-05-12/", "Reuters Oil": "https://www.reuters.com/business/energy/oil-prices-rise-fragile-us-iran-talks-sustain-supply-worries-2026-05-12/", "Reuters Fed": "https://www.reuters.com/markets/us/feds-goolsbee-says-hes-disappointed-by-latest-inflation-read-2026-05-12/", "Reuters Germany ZEW": "https://www.reuters.com/business/retail-consumer/german-investor-morale-rises-unexpectedly-may-zew-finds-2026-05-12/", "Guardian UK": "https://www.theguardian.com/business/live/2026/may/12/uk-bond-yields-borrowing-costs-pound-falls-oil-inflation-live-updates", "Reuters US Budget": "https://www.reuters.com/markets/asia/us-posts-smaller-215-billion-budget-surplus-april-tax-refunds-grow-2026-05-12/", "Reuters China-US Hormuz": "https://www.reuters.com/world/china/china-us-agree-opposing-hormuz-tolls-state-department-says-2026-05-12/", "Reuters Asia Hedge Funds": "https://www.reuters.com/markets/wealth/hedge-funds-record-decade-high-weekly-buying-korea-japan-taiwan-equities-morgan-2026-05-12/", "Reuters India/Rupee": "https://www.reuters.com/world/india/rupee-hits-record-low-fraying-us-iran-ceasefire-keeps-oil-prices-boil-2026-05-12/", "Trading Economics Indonesia": "https://tradingeconomics.com/indonesia/government-bond-yield", "Reuters Gold": "https://www.reuters.com/world/china/gold-rises-with-uschina-talks-mideast-conflict-focus-2026-05-12/", "TradingCharts USD Calendar": "https://forex.tradingcharts.com/economic_calendar/2026-05-12.html?code=usd", "TradingCharts EUR Calendar": "https://forex.tradingcharts.com/economic_calendar/2026-05-12.html?code=eur", "TradingCharts AUD Calendar": "https://forex.tradingcharts.com/economic_calendar/2026-05-12.html?code=aud", "RTTNews Calendar": "https://www.rttnews.com/corpinfo/economiccalendar.aspx?date=12-May-2026", "Reuters EM Flows": "https://www.reuters.com/markets/wealth/emerging-market-investors-shrug-off-iran-war-shock-iif-data-shows-2026-05-11/", "Reuters Australia Budget": "https://www.reuters.com/world/asia-pacific/australian-budget-seeks-balance-bold-reform-with-inflation-restraint-2026-05-11/", "Japan MOF BOP": "https://www.mof.go.jp/english/policy/international_policy/reference/balance_of_payments/index.htm"};
+    const METHOD = ["Periode coverage: 12 May 2026 06:01 WIB – 13 May 2026 06:00 WIB, ekuivalen 11 May 2026 23:01 UTC – 12 May 2026 23:00 UTC.", "Sumber berita diprioritaskan dari Reuters, BLS, Trading Economics, TradingCharts/RTTNews, dan The Guardian untuk konteks UK market live coverage.", "Economic calendar menggunakan rilis yang memiliki actual di dalam window. Rilis setelah 06:00 WIB dipindahkan ke Watchlist.", "High impact diberikan pada data/berita yang berpotensi mengubah ekspektasi suku bunga, inflasi, fiscal risk, sovereign risk, energi, geopolitik, capital flow, atau EM risk.", "Surprise diklasifikasikan secara kontekstual. Inflasi lebih tinggi dari forecast dianggap negatif untuk obligasi meskipun dapat menunjukkan demand nominal masih kuat.", "Dashboard ini adalah analytical monitoring, bukan rekomendasi investasi."];
+
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+    document.querySelectorAll('.nav button[data-jump]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.jump).scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    function impactLetter(impact) {
+      const cls = impact === 'High' ? 'high' : 'medium';
+      const letter = impact === 'High' ? 'H' : 'M';
+      return `<span class="impact-letter ${cls}" title="${impact} impact" aria-label="${impact} impact">${letter}</span>`;
+    }
+
+    function renderSummary() {
+      document.getElementById('summaryList').innerHTML = SUMMARY.map(x => `<li>${esc(x)}</li>`).join('');
+    }
+
+    function populateFilters() {
+      const cf = document.getElementById('countryFilter');
+      [...new Set(NEWS.map(n => n.region))].sort().forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        cf.appendChild(opt);
+      });
+    }
+
+    function renderNews() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const country = document.getElementById('countryFilter').value;
+      const impact = document.getElementById('impactFilter').value;
+      const grid = document.getElementById('newsGrid');
+      const filtered = NEWS.filter(n => {
+        const blob = [n.country,n.region,n.impact,n.headline,n.source,n.summary,n.market,n.implication,...n.tags].join(' ').toLowerCase();
+        return (!q || blob.includes(q)) && (country === 'All' || n.region === country) && (impact === 'All' || n.impact === impact);
+      });
+      grid.innerHTML = filtered.map(n => `
+        <article class="card news-card" data-id="${esc(n.id)}">
+          <div class="news-head">
+            <div class="news-topline">
+              <span class="country">${esc(n.country)}</span>
+              <span class="impact-badge ${esc(n.impact)}">${esc(n.impact)}</span>
+            </div>
+            <h3>${esc(n.headline)}</h3>
+            <p>${esc(n.summary)}</p>
+            <div class="pill-row">${n.tags.map(t => `<span class="pill ${n.impact === 'High' ? 'high' : 'medium'}">${esc(t)}</span>`).join('')}</div>
+          </div>
+          <div class="news-body">
+            <div class="detail-grid">
+              <div class="detail-box"><strong>Source and published time</strong>${esc(n.source)} · ${esc(n.published)}</div>
+              <div class="detail-box"><strong>Market relevance</strong>${esc(n.market)}</div>
+              <div class="detail-box"><strong>Possible implication</strong>${esc(n.implication)}</div>
+            </div>
+            <div class="news-actions">
+              <a href="${esc(n.url)}" target="_blank" rel="noopener">Open source</a>
+            </div>
+          </div>
+          <div style="padding:0 17px 17px"><button class="toggle-detail" onclick="toggleCard('${esc(n.id)}')">Expand / collapse detail</button></div>
+        </article>
+      `).join('') || `<div class="card">No matching news items.</div>`;
+    }
+    function toggleCard(id) {
+      const el = document.querySelector(`.news-card[data-id="${CSS.escape(id)}"]`);
+      if (el) el.classList.toggle('open');
+    }
+
+    function renderCountries(active = 'US') {
+      const tabs = document.getElementById('countryTabs');
+      tabs.innerHTML = COUNTRIES.map(c => `<button class="${c.name === active ? 'active' : ''}" onclick="renderCountries('${esc(c.name)}')">${esc(c.name)}</button>`).join('');
+      const c = COUNTRIES.find(x => x.name === active) || COUNTRIES[0];
+      document.getElementById('countryPanel').innerHTML = `
+        <h3>${esc(c.name)}</h3>
+        <div class="label">Key news</div><p>${esc(c.keyNews)}</p>
+        <div class="label">Key data releases</div><p>${esc(c.data)}</p>
+        <div class="label">Market interpretation</div><p>${esc(c.interpretation)}</p>
+        <div class="label">Watch points for next period</div><p>${esc(c.watch)}</p>
+      `;
+    }
+
+    let sortState = { key: 'time', asc: true };
+    function renderCalendar() {
+      const tbody = document.querySelector('#calendarTable tbody');
+      let rows = [...CALENDAR];
+      rows.sort((a,b) => {
+        const av = String(a[sortState.key] ?? '');
+        const bv = String(b[sortState.key] ?? '');
+        return sortState.asc ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td class="col-time">${esc(r.time)}</td>
+          <td class="col-country">${esc(r.country)}</td>
+          <td class="col-indicator">${esc(r.indicator)}<br><small style="color:#706575">${esc(r.source)}</small></td>
+          <td class="col-impact">${impactLetter(r.impact)}</td>
+          <td class="col-actual">${esc(r.actual)}</td>
+          <td class="col-forecast">${esc(r.forecast)}</td>
+          <td class="col-previous">${esc(r.previous)}</td>
+          <td class="col-surprise">${esc(r.surprise)}</td>
+          <td class="col-interpretation">${esc(r.interpretation)}</td>
+          <td class="col-market">${esc(r.channel)}</td>
+        </tr>
+      `).join('');
+    }
+    document.querySelectorAll('#calendarTable th[data-sort]').forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.sort;
+        sortState = { key, asc: sortState.key === key ? !sortState.asc : true };
+        renderCalendar();
+      });
+    });
+
+    function renderHeatmap() {
+      document.querySelector('#heatmapTable tbody').innerHTML = HEATMAP.map(r => `
+        <tr>
+          <td><strong>${esc(r.country)}</strong></td>
+          <td><span class="score s${r.inflation}">${r.inflation}</span></td>
+          <td><span class="score s${r.growth}">${r.growth}</span></td>
+          <td><span class="score s${r.fiscal}">${r.fiscal}</span></td>
+          <td><span class="score s${r.geo}">${r.geo}</span></td>
+          <td><span class="score s${r.market}">${r.market}</span></td>
+          <td><span class="score s${r.spillover}">${r.spillover}</span></td>
+          <td>${esc(r.note)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderIndonesia() {
+      document.getElementById('indonesiaGrid').innerHTML = INDONESIA.map(p => `
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--primary-dark)">${esc(p.title)}</h3>
+          <p>${esc(p.body)}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderWatchlist() {
+      document.getElementById('watchGrid').innerHTML = WATCHLIST.map(w => `
+        <div class="card watch-item">
+          <h3>${esc(w.item)}</h3>
+          <p><strong>Why monitor:</strong> ${esc(w.why)}</p>
+          <p><strong>Market channel:</strong> ${esc(w.market)}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderMethod() {
+      document.getElementById('methodList').innerHTML = METHOD.map(x => `<li>${esc(x)}</li>`).join('');
+      document.getElementById('sourceList').innerHTML = Object.entries(SOURCES).map(([k,v]) => `<li><a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a></li>`).join('');
+    }
+
+    ['searchInput','countryFilter','impactFilter'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderNews);
+      document.getElementById(id).addEventListener('change', renderNews);
+    });
+
+    renderSummary();
+    populateFilters();
+    renderNews();
+    renderCountries();
+    renderCalendar();
+    renderHeatmap();
+    renderIndonesia();
+    renderWatchlist();
+    renderMethod();
+  </script>
+</body>
+</html>
