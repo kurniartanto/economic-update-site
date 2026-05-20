@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>What Happened in the Last 24 Hours | Market Monitor | 20 Mei 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --primary: #5A1F59;
+    --primary-dark: #3B123A;
+    --primary-light: #743073;
+    --primary-lighter: #8F4B8E;
+    --gold: #FBBA15;
+    --gold-light: #FFD766;
+    --gold-pale: #FFF2C2;
+    --white: #FFFFFF;
+    --bg: #FAF8FB;
+    --bg-card: #FFFFFF;
+    --text-primary: #2D1A2D;
+    --text-secondary: #5A405A;
+    --text-muted: #9078A0;
+    --border: #E8DFF0;
+    --red: #C0392B;
+    --red-light: #FAE9E8;
+    --green: #0FA056;
+    --green-light: #E6F6EE;
+    --orange: #D45D15;
+    --orange-light: #FDF0E8;
+    --blue: #1A5FAD;
+    --blue-light: #E8F0FB;
+    --shadow-sm: 0 1px 4px rgba(90,31,89,0.08);
+    --shadow-md: 0 4px 16px rgba(90,31,89,0.12);
+    --shadow-lg: 0 8px 32px rgba(90,31,89,0.16);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--primary-dark);
+    overflow: hidden;
+    padding: 8px 0;
+    border-bottom: 2px solid var(--gold);
+  }
+  .ticker-track {
+    display: flex;
+    gap: 48px;
+    animation: ticker 60s linear infinite;
+    width: max-content;
+  }
+  .ticker-item {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--white); font-size: 12px; font-weight: 500; white-space: nowrap;
+  }
+  .ticker-label { color: var(--gold); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .ticker-up { color: #4ECDC4; }
+  .ticker-dn { color: #FF6B6B; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* HERO HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    padding: 40px 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(251,186,21,0.04) 24px, rgba(251,186,21,0.04) 48px);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(251,186,21,0.15); border: 1px solid rgba(251,186,21,0.4);
+    color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px; color: var(--white); line-height: 1.15; margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--gold); font-style: italic; }
+  .hero-subtitle { color: rgba(255,255,255,0.82); font-size: 15px; max-width: 780px; line-height: 1.6; margin-bottom: 20px; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    font-size: 12px; color: rgba(255,255,255,0.6);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta strong { color: var(--gold-light); }
+
+  /* NAV TABS */
+  .tab-nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    padding: 0 32px;
+    display: flex; gap: 0; overflow-x: auto;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .tab-nav::-webkit-scrollbar { height: 0; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 14px 20px;
+    border: none; background: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--primary); }
+  .tab-btn.active { color: var(--primary); border-bottom-color: var(--gold); }
+
+  /* MAIN LAYOUT */
+  .main { padding: 28px 32px; max-width: 1440px; margin: 0 auto; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg-card); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 20px;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--primary);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--primary);
+    margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gold);
+  }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+  /* STAT CARDS */
+  .stat-card {
+    background: var(--bg-card); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 6px; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text-primary); }
+  .stat-change { font-size: 12px; font-weight: 600; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+  .chg-up { color: var(--green); }
+  .chg-dn { color: var(--red); }
+  .stat-note { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+  .badge-up { background: var(--green-light); color: var(--green); }
+  .badge-dn { background: var(--red-light); color: var(--red); }
+  .badge-neutral { background: var(--border); color: var(--text-secondary); }
+  .badge-warn { background: var(--orange-light); color: var(--orange); }
+  .badge-info { background: var(--blue-light); color: var(--blue); }
+  .badge-gold { background: var(--gold-pale); color: #8B6B00; }
+
+  /* ARROW ICONS */
+  .arrow-up::before { content: '▲ '; font-size: 9px; }
+  .arrow-dn::before { content: '▼ '; font-size: 9px; }
+  .arrow-flat::before { content: '▶ '; font-size: 9px; }
+
+  /* EXECUTIVE SUMMARY */
+  .exec-bullets { list-style: none; }
+  .exec-bullets li {
+    padding: 12px 16px; border-left: 3px solid var(--gold);
+    background: var(--gold-pale); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 10px; font-size: 13.5px; line-height: 1.6;
+  }
+  .exec-bullets li strong { color: var(--primary); }
+
+  /* PULSE CARDS */
+  .pulse-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white; border-radius: var(--radius); padding: 20px;
+  }
+  .pulse-card .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.7; margin-bottom: 8px; }
+  .pulse-card .value { font-family: 'DM Serif Display', serif; font-size: 20px; }
+  .pulse-card .desc { font-size: 12px; opacity: 0.8; margin-top: 6px; }
+
+  /* RISK HEATMAP */
+  .heatmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .heatmap-cell { border-radius: var(--radius-sm); padding: 14px; text-align: center; }
+  .risk-1 { background: #E8F6ED; border: 1px solid #8FD4A8; }
+  .risk-2 { background: #FFF3CD; border: 1px solid #F8C94E; }
+  .risk-3 { background: #FFE8CC; border: 1px solid #F4A55A; }
+  .risk-4 { background: #FDDDD9; border: 1px solid #E9807A; }
+  .risk-5 { background: #F5D2D2; border: 1px solid #D04343; }
+  .heatmap-score { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; }
+  .heatmap-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .heatmap-desc { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* NEWS CARDS */
+  .news-card {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg-card); margin-bottom: 14px; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .news-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .news-header:hover { background: var(--gold-pale); }
+  .news-impact-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .impact-high { background: var(--red); }
+  .impact-medium { background: var(--orange); }
+  .news-body-text { flex: 1; }
+  .news-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .news-headline { font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.4; }
+  .news-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .news-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px; background: var(--border); color: var(--text-secondary); }
+  .expand-icon { font-size: 12px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.2s; }
+  .news-detail { display: none; border-top: 1px solid var(--border); padding: 16px 18px; background: var(--bg); }
+  .news-detail.open { display: block; }
+  .expand-icon.open { transform: rotate(180deg); }
+  .detail-section { margin-bottom: 12px; }
+  .detail-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; letter-spacing: 0.5px; }
+  .detail-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .detail-idr { background: var(--gold-pale); border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .detail-idr p { font-size: 13px; color: var(--primary-dark); line-height: 1.6; }
+
+  /* ECONOMIC CALENDAR TABLE */
+  .table-scroll { overflow-x: auto; overflow-y: visible; border-radius: 10px; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); }
+  #calendarTable { min-width: 2260px; table-layout: fixed; border-collapse: collapse; width: 100%; }
+  #calendarTable thead { background: var(--primary); }
+  #calendarTable th { color: var(--white); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 14px; text-align: left; }
+  #calendarTable td { padding: 11px 14px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; }
+  #calendarTable tbody tr:hover { background: var(--gold-pale); }
+  #calendarTable tbody tr:last-child td { border-bottom: none; }
+  #calendarTable th, #calendarTable td { word-break: normal; overflow-wrap: normal; hyphens: none; overflow: hidden; }
+  #calendarTable .col-time { width: 128px; white-space: nowrap; }
+  #calendarTable .col-country { width: 140px; white-space: nowrap; }
+  #calendarTable .col-indicator { width: 300px; white-space: normal; overflow-wrap: break-word; }
+  #calendarTable .col-impact { width: 70px; text-align: center; white-space: nowrap; }
+  #calendarTable .col-actual, #calendarTable .col-forecast, #calendarTable .col-previous { width: 180px; white-space: normal; overflow-wrap: break-word; }
+  #calendarTable .col-surprise { width: 220px; white-space: normal; overflow-wrap: break-word; }
+  #calendarTable .col-interpretation { width: 500px; white-space: normal; overflow-wrap: break-word; }
+  #calendarTable .col-market { width: 240px; white-space: normal; overflow-wrap: break-word; }
+  #calendarTable th.col-time, #calendarTable th.col-country, #calendarTable th.col-impact { white-space: nowrap; }
+  .impact-letter { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; font-weight: 900; font-size: 13px; }
+  .impact-letter.high { background: #8A1E2D; color: #fff; }
+  .impact-letter.medium { background: #FBBA15; color: #3B123A; }
+  .table-legend { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+  .actual-beat { color: var(--green); font-weight: 700; }
+  .actual-miss { color: var(--red); font-weight: 700; }
+  .actual-inline { color: var(--text-secondary); font-weight: 600; }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    padding: 14px 0; margin-bottom: 16px;
+  }
+  .filter-bar input[type=text] {
+    padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-primary);
+    outline: none; width: 260px;
+  }
+  .filter-bar input[type=text]:focus { border-color: var(--primary); }
+  .filter-btn {
+    padding: 7px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    background: var(--bg-card); cursor: pointer; font-size: 12px; font-weight: 600;
+    color: var(--text-secondary); transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+  /* WATCHLIST */
+  .watchlist-item { padding: 14px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
+  .watchlist-item:last-child { border-bottom: none; }
+  .watchlist-icon { font-size: 18px; }
+  .watchlist-text strong { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .watchlist-text p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* INDONESIA RELEVANCE PANEL */
+  .idr-panel { background: linear-gradient(135deg, var(--gold-pale) 0%, #FFF8E0 100%); border: 1px solid var(--gold); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+  .idr-panel h3 { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--primary); margin-bottom: 14px; }
+  .idr-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .idr-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+  .idr-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* SOURCE SECTION */
+  .source-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; }
+  .source-box h4 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .source-box p, .source-box li { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+  .source-box ul { padding-left: 16px; }
+
+  /* PRINT */
+  .print-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; background: var(--primary); color: white;
+    border: none; border-radius: var(--radius-sm); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    float: right; margin-top: -4px;
+  }
+  .print-btn:hover { background: var(--primary-dark); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  /* COUNTRY FLAG */
+  .flag { font-size: 18px; }
+
+  /* SENTIMENT GAUGE */
+  .sentiment-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 18px; border-radius: 100px; font-weight: 700; font-size: 14px;
+  }
+  .sentiment-risk-off { background: var(--red-light); color: var(--red); border: 1px solid var(--red); }
+  .sentiment-risk-on { background: var(--green-light); color: var(--green); border: 1px solid var(--green); }
+  .sentiment-mixed { background: var(--orange-light); color: var(--orange); border: 1px solid var(--orange); }
+  .sentiment-neutral { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: 1fr 1fr; } .grid-3 { grid-template-columns: 1fr 1fr; } .hero-title { font-size: 26px; } .main { padding: 16px; } .tab-nav { padding: 0 16px; } }
+  @media (max-width: 600px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } .heatmap { grid-template-columns: 1fr 1fr; } }
+
+  @media print {
+    .ticker-wrap, .tab-nav, .filter-bar, .print-btn, .tab-btn { display: none !important; }
+    .tab-content { display: block !important; }
+    .main { padding: 0; }
+    body { font-size: 11px; }
+    .card, .stat-card, .news-card { page-break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+
+  /* TOGGLE VIEW BUTTONS */
+  .view-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
+  .view-btn {
+    padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border);
+    background: var(--bg-card); cursor: pointer; font-size: 12px; font-weight: 600;
+    color: var(--text-secondary); transition: all 0.15s;
+  }
+  .view-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .view-section { display: none; }
+  .view-section.active { display: block; }
+  .pending { color: var(--orange); font-style: italic; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- LIVE TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item"><span class="ticker-label">S&P 500</span> 7,353.61 <span class="ticker-dn arrow-dn">−0.67%</span></span>
+    <span class="ticker-item"><span class="ticker-label">Nasdaq</span> 25,870.71 <span class="ticker-dn arrow-dn">−0.84%</span></span>
+    <span class="ticker-item"><span class="ticker-label">DJIA</span> 49,363.88 <span class="ticker-dn arrow-dn">−0.65%</span></span>
+    <span class="ticker-item"><span class="ticker-label">UST 10Y</span> 4.687% <span class="ticker-dn arrow-up">▲ 16-mth high</span></span>
+    <span class="ticker-item"><span class="ticker-label">UST 30Y</span> 5.189% <span class="ticker-dn arrow-up">▲ 19-yr high</span></span>
+    <span class="ticker-item"><span class="ticker-label">Brent</span> ~$110.69/bbl <span class="ticker-dn arrow-dn">−1.2%</span></span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span> ~$108.21/bbl <span class="ticker-dn arrow-dn">−0.4%</span></span>
+    <span class="ticker-item"><span class="ticker-label">Gold</span> $4,550/oz <span class="ticker-up arrow-up">+safe haven</span></span>
+    <span class="ticker-item"><span class="ticker-label">USD/IDR</span> 17,752 <span class="ticker-dn arrow-up">▲ rekor terendah</span></span>
+    <span class="ticker-item"><span class="ticker-label">SBN 10Y</span> 6.85% <span class="ticker-dn arrow-up">▲ tekanan</span></span>
+    <span class="ticker-item"><span class="ticker-label">BTC</span> $76,565 <span class="ticker-dn arrow-dn">−1.0%</span></span>
+    <span class="ticker-item"><span class="ticker-label">EUR/USD</span> ~1.1680 <span class="ticker-up arrow-up">+USD melemah vs EUR</span></span>
+    <span class="ticker-item"><span class="ticker-label">F&G Index</span> 61 – Greed <span class="ticker-neutral">●</span></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-label">S&P 500</span> 7,353.61 <span class="ticker-dn arrow-dn">−0.67%</span></span>
+    <span class="ticker-item"><span class="ticker-label">Nasdaq</span> 25,870.71 <span class="ticker-dn arrow-dn">−0.84%</span></span>
+    <span class="ticker-item"><span class="ticker-label">DJIA</span> 49,363.88 <span class="ticker-dn arrow-dn">−0.65%</span></span>
+    <span class="ticker-item"><span class="ticker-label">UST 10Y</span> 4.687% <span class="ticker-dn arrow-up">▲ 16-mth high</span></span>
+    <span class="ticker-item"><span class="ticker-label">UST 30Y</span> 5.189% <span class="ticker-dn arrow-up">▲ 19-yr high</span></span>
+    <span class="ticker-item"><span class="ticker-label">Brent</span> ~$110.69/bbl <span class="ticker-dn arrow-dn">−1.2%</span></span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span> ~$108.21/bbl <span class="ticker-dn arrow-dn">−0.4%</span></span>
+    <span class="ticker-item"><span class="ticker-label">Gold</span> $4,550/oz <span class="ticker-up arrow-up">+safe haven</span></span>
+    <span class="ticker-item"><span class="ticker-label">USD/IDR</span> 17,752 <span class="ticker-dn arrow-up">▲ rekor terendah</span></span>
+    <span class="ticker-item"><span class="ticker-label">SBN 10Y</span> 6.85% <span class="ticker-dn arrow-up">▲ tekanan</span></span>
+    <span class="ticker-item"><span class="ticker-label">BTC</span> $76,565 <span class="ticker-dn arrow-dn">−1.0%</span></span>
+    <span class="ticker-item"><span class="ticker-label">EUR/USD</span> ~1.1680 <span class="ticker-up arrow-up">+USD melemah vs EUR</span></span>
+    <span class="ticker-item"><span class="ticker-label">F&G Index</span> 61 – Greed <span class="ticker-neutral">●</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📊 Economic News Monitoring </div>
+  <h1 class="hero-title">What Happened in the <span>Last 24 Hours</span></h1>
+  <p class="hero-subtitle">
+    Pasar global tertekan oleh dua kekuatan simultan: lonjakan yield UST 30Y ke 5.19% (tertinggi sejak 2007) akibat kekhawatiran fiskal AS dan dampak "One Big Beautiful Bill Act", serta eskalasi-deeskalasi konflik Iran yang menjaga harga minyak tetap tinggi di atas $108–$111/bbl. Rupiah menyentuh rekor terlemah baru di 17.752 per dolar, mempertegas tekanan ganda pada biaya utang dan cadangan devisa Indonesia.
+  </p>
+  <div class="hero-meta">
+    <span>📅 Coverage: <strong>19 Mei 2026 06:01 WIB – 20 Mei 2026 06:00 WIB</strong></span>
+    <span>⏱ Generated: <strong>20 Mei 2026, 07:00 WIB</strong></span>
+    <span>🌐 Cakupan: <strong>Global Penuh</strong></span>
+    <span>📍 Zona Waktu: <strong>WIB (UTC+7)</strong></span>
+  </div>
+</div>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('berita')">📰 Berita Utama</button>
+  <button class="tab-btn" onclick="showTab('calendar')">📆 Kalender Ekonomi</button>
+  <button class="tab-btn" onclick="showTab('pasar')">📈 Pasar Global</button>
+  <button class="tab-btn" onclick="showTab('indonesia')">🇮🇩 Indonesia</button>
+  <button class="tab-btn" onclick="showTab('komoditas')">⛽ Komoditas</button>
+  <button class="tab-btn" onclick="showTab('kripto')">₿ Kripto</button>
+  <button class="tab-btn" onclick="showTab('watchlist')">👁 Watchlist</button>
+  <button class="tab-btn" onclick="showTab('metodologi')">📚 Metodologi</button>
+</nav>
+
+<div class="main">
+
+<!-- ===== OVERVIEW TAB ===== -->
+<div class="tab-content active" id="tab-overview">
+  <button class="print-btn" onclick="window.print()">🖨 Print / PDF</button>
+  <h2 class="section-title">Executive Summary</h2>
+  <ul class="exec-bullets">
+    <li><strong>UST Yield Surge + Fiscal Risk AS:</strong> Yield UST 30Y menembus 5.19%—level tertinggi dalam hampir 19 tahun—dipicu kombinasi kekhawatiran defisit fiskal AS pasca Moody's downgrade (Mei 2025: Aaa→Aa1) dan proses legislasi "One Big Beautiful Bill Act" yang diperkirakan menambah $3.4–4.2 triliun defisit. Pasar saham AS merespons negatif: S&P 500 −0.67%, Nasdaq −0.84%, DJIA −0.65%, dengan sesi ketiga berturut-turut merugi.</li>
+    <li><strong>Minyak Volatil, Iran-AS Memberi Sinyal Campuran:</strong> Brent sempat diperdagangkan di kisaran $108–$111/bbl setelah Trump mengumumkan pembatalan serangan terencana ke Iran atas permintaan Saudi Arabia, Qatar, dan UAE. Namun pasar tetap waspada karena Selat Hormuz belum dibuka penuh dan Iran belum mengonfirmasi dimulainya negosiasi substansial. Total kenaikan Brent lebih dari 50% sejak konflik mulai 28 Februari 2026.</li>
+    <li><strong>Rupiah Cetak Rekor Terendah Baru:</strong> USD/IDR menyentuh 17,752 pada 19 Mei—rekor terendah sepanjang sejarah—dengan pelemahan 1.32% dalam sepekan dan 8.04% secara tahunan. Cadangan devisa tertekan, dan Presiden Prabowo sempat menegur Gubernur BI atas pelemahan rupiah.</li>
+    <li><strong>Yield SBN 10Y Menebal di 6.85%:</strong> Mengikuti trajectory UST yield yang naik, spread SBN-UST mencapai ~225 bps. Kepemilikan asing di SBN turun ke ~12.75% (terendah multi-tahun). Pemerintah meluncurkan Bond Stabilization Fund sebagai respons.</li>
+    <li><strong>UK CPI April 2026 Dijadwalkan Rilis Hari Ini:</strong> Inflasi UK Maret 3.3% (tertinggi sejak Des 2022), dengan April diperkirakan sedikit menurun karena base effect, namun tetap jauh di atas target 2% BoE. Konflik Iran mendorong ekspektasi inflasi UK tetap elevated di 3–3.5% Q2–Q3 2026.</li>
+    <li><strong>Japan CPI April Masih Pending:</strong> Data CPI nasional Jepang untuk April 2026 belum dirilis per periode coverage; data terakhir adalah Maret (headline 1.5%, core 1.8%). BoJ tetap di 0.75% namun menunjukkan bias hawkish. Tokyo CPI April naik ke 1.5% dari 1.4%.</li>
+    <li><strong>Sentimen Pasar Global: Mixed-to-Risk Off:</strong> CNN Fear & Greed Index berada di 61 (Greed) pada 19 Mei 2026—namun ini tidak mencerminkan keselarasan: yield curve memperlihatkan sinyal fiskal distress yang bertolak belakang dengan ekuitas yang masih relatif tinggi secara valuasi (P/E forward S&P 500 di 20.9x vs rata-rata 10 tahun 18.9x).</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2 class="section-title">Global Market Pulse</h2>
+  <div class="grid-3" style="margin-bottom:20px;">
+    <div class="pulse-card">
+      <div class="label">Global Risk Sentiment</div>
+      <div class="value">⚠️ Mixed–Risk Off</div>
+      <div class="desc">Ekuitas turun, yield naik tajam, minyak volatile. Pasar dalam mode wait-and-see terhadap Iran dan fiskal AS.</div>
+    </div>
+    <div class="pulse-card" style="background: linear-gradient(135deg,#7B2D2D,#A03030);">
+      <div class="label">Dominant Driver</div>
+      <div class="value">💹 Fiscal Risk + Geopolitik</div>
+      <div class="desc">Lonjakan yield UST akibat fiskal AS & "Big Beautiful Bill" + volatilitas energi dari konflik Iran-AS.</div>
+    </div>
+    <div class="pulse-card" style="background: linear-gradient(135deg,#1A4A6B,#2A6B9B);">
+      <div class="label">Implikasi untuk Indonesia</div>
+      <div class="value">🇮🇩 Pressured</div>
+      <div class="desc">Tekanan triple: rupiah melemah, yield SBN naik, kapital asing keluar dari SBN. Biaya utang meningkat.</div>
+    </div>
+  </div>
+
+  <!-- HEATMAP -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title">Risk Heatmap — Dimensi Risiko Global</div>
+    <div class="heatmap">
+      <div class="heatmap-cell risk-5">
+        <div class="heatmap-score" style="color:#C0392B;">5</div>
+        <div class="heatmap-label" style="color:#C0392B;">Fiskal AS</div>
+        <div class="heatmap-desc">UST 30Y 5.19%, downgrade Moody's, OBBBA deficit +$3.4T. Extreme risk.</div>
+      </div>
+      <div class="heatmap-cell risk-4">
+        <div class="heatmap-score" style="color:#D45D15;">4</div>
+        <div class="heatmap-label" style="color:#D45D15;">Geopolitik Iran</div>
+        <div class="heatmap-desc">Hormuz masih terdampak, negosiasi belum final. Trump delay strike beri harapan singkat.</div>
+      </div>
+      <div class="heatmap-cell risk-4">
+        <div class="heatmap-score" style="color:#D45D15;">4</div>
+        <div class="heatmap-label" style="color:#D45D15;">Energi / Komoditas</div>
+        <div class="heatmap-desc">Brent >$108/bbl. Goldman Sachs: setiap bulan Hormuz tertutup +$10 harga minyak akhir tahun.</div>
+      </div>
+      <div class="heatmap-cell risk-4">
+        <div class="heatmap-score" style="color:#D45D15;">4</div>
+        <div class="heatmap-label" style="color:#D45D15;">Inflasi Global</div>
+        <div class="heatmap-desc">UK CPI 3.3%, BoE stagflation risk. Japan core 1.8%. Fed diperkirakan hold lebih lama.</div>
+      </div>
+      <div class="heatmap-cell risk-4">
+        <div class="heatmap-score" style="color:#D45D15;">4</div>
+        <div class="heatmap-label" style="color:#D45D15;">Capital Flow EM</div>
+        <div class="heatmap-desc">EM termasuk Indonesia alami outflow. SBN asing turun ke 12.75%. Rupiah record low.</div>
+      </div>
+      <div class="heatmap-cell risk-3">
+        <div class="heatmap-score" style="color:#B8860B;">3</div>
+        <div class="heatmap-label" style="color:#B8860B;">Kebijakan Moneter</div>
+        <div class="heatmap-desc">Fed hold, BoJ tahan 0.75%. BI diperkirakan naik ke 5% untuk stabilisasi rupiah.</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:10px;">Skala 1–5: 1=Rendah, 3=Sedang, 5=Ekstrem. Penilaian bersifat analitis, bukan rekomendasi investasi.</p>
+  </div>
+
+  <!-- KEY MARKET STATS -->
+  <h2 class="section-title">Snapshot Pasar Utama</h2>
+  <div class="grid-4" style="margin-bottom:16px;">
+    <div class="stat-card">
+      <div class="stat-label">🇺🇸 S&P 500</div>
+      <div class="stat-value">7,353.61</div>
+      <div class="stat-change chg-dn"><span class="arrow-dn">−0.67%</span></div>
+      <div class="stat-note">3 sesi berturut merugi. Sesion ke-3 beruntun memerah.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">📈 UST 10Y Yield</div>
+      <div class="stat-value">4.687%</div>
+      <div class="stat-change chg-dn"><span class="badge badge-dn">▲ 16-month high</span></div>
+      <div class="stat-note">Rising yield = tekanan obligasi negara</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">📈 UST 30Y Yield</div>
+      <div class="stat-value">5.189%</div>
+      <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Tertinggi 19 tahun</span></div>
+      <div class="stat-note">Alarm: fiskal distress AS. Pernah dicapai 2007.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">⛽ Brent Crude</div>
+      <div class="stat-value">~$110.7</div>
+      <div class="stat-change chg-dn"><span class="arrow-dn">−1.1%</span> dari $112+</div>
+      <div class="stat-note">Turun sedikit pasca Trump delay serangan Iran.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🇮🇩 USD/IDR</div>
+      <div class="stat-value">17,752</div>
+      <div class="stat-change chg-dn"><span class="badge badge-dn">Rekor Terendah</span></div>
+      <div class="stat-note">−8.04% YoY. Tren lemah ke-7 pekan berturut.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🇮🇩 SBN 10Y Yield</div>
+      <div class="stat-value">6.85%</div>
+      <div class="stat-change chg-dn"><span class="badge badge-dn">▲ 3-week high</span></div>
+      <div class="stat-note">Spread vs UST ~225 bps. Rising = negatif harga SBN.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🥇 Gold</div>
+      <div class="stat-value">$4,550</div>
+      <div class="stat-change chg-up"><span class="arrow-up">Safe haven demand</span></div>
+      <div class="stat-note">GS target $5,400/oz end-2026. CB beli 60t/bln.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">₿ Bitcoin</div>
+      <div class="stat-value">$76,565</div>
+      <div class="stat-change chg-dn"><span class="arrow-dn">−$783 vs kemarin</span></div>
+      <div class="stat-note">Crypto F&G: Fear (score 28). Tekanan makro.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== END OVERVIEW ===== -->
+
+<!-- ===== BERITA UTAMA TAB ===== -->
+<div class="tab-content" id="tab-berita">
+  <div class="filter-bar">
+    <input type="text" id="newsSearch" placeholder="🔍 Cari berita, negara, tema..." oninput="filterNews()"/>
+    <button class="filter-btn active" onclick="setNewsFilter('all',this)">Semua</button>
+    <button class="filter-btn" onclick="setNewsFilter('high',this)">🔴 High Impact</button>
+    <button class="filter-btn" onclick="setNewsFilter('medium',this)">🟠 Medium Impact</button>
+    <button class="filter-btn" onclick="setNewsFilter('id',this)">🇮🇩 Indonesia</button>
+    <button class="filter-btn" onclick="setNewsFilter('us',this)">🇺🇸 AS</button>
+    <button class="filter-btn" onclick="setNewsFilter('oil',this)">⛽ Energi</button>
+  </div>
+
+  <div id="newsList">
+
+    <!-- NEWS 1 -->
+    <div class="news-card" data-impact="high" data-region="us" data-tags="yield fiskal defisit">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-high"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">UST 30Y Tembus 5.19% — Tertinggi dalam 19 Tahun; S&P 500 Catat Sesi Rugi Ketiga Beruntun</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 19 Mei 2026 (sesi New York) &nbsp;|&nbsp; 🇺🇸 United States &nbsp;|&nbsp; Sumber: CNBC, The Street</div>
+          <div class="news-tags">
+            <span class="badge badge-dn">HIGH IMPACT</span>
+            <span class="tag">US Treasury</span><span class="tag">Fiscal Risk</span><span class="tag">Equity</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Yield obligasi AS jangka panjang kembali melompat pada sesi perdagangan 19 Mei 2026. UST 10Y menyentuh 4.687%—level tertinggi sejak Januari 2025—sementara UST 30Y sempat menyentuh 5.19% dan UST 20Y mencapai 5.189%, keduanya merupakan level tertinggi dalam hampir dua dekade. S&P 500 ditutup −0.67% di 7,353.61, Nasdaq −0.84% di 25,870.71, dan DJIA −0.65% di 49,363.88. Russell 2000 melemah lebih dalam, −1.33%. Sesi ini merupakan sesi merah ketiga berturut untuk indeks-indeks utama.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Lonjakan yield ini mencerminkan kekhawatiran ganda pasar: (1) dampak fiskal jangka panjang dari "One Big Beautiful Bill Act" (OBBBA) yang diperkirakan menambah $3.4–4.2 triliun defisit AS dalam dekade mendatang, (2) efek residual dari downgrade Moody's AS dari Aaa ke Aa1 (Mei 2025) yang semakin terasa melalui term premium. Kenaikan yield 30Y secara historis merupakan sinyal pasar obligasi yang kurang percaya terhadap kemampuan fiskal jangka panjang pemerintah AS.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Market Impact Channel</div>
+          <div class="detail-text">Higher discount rate → tekanan valuasi ekuitas terutama growth/tech stocks → rotation ke defensif. Spread kredit korporat melebar. USD cenderung mixed karena US fiscal concern mengimbangi safe haven demand. Saham sektor teknologi megacap menjadi pemberat utama indeks.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia </div>
+          <p>Kenaikan UST yield memaksa spread SBN-UST tetap elevated atau bahkan melebar. Yield SBN 10Y mengikuti di 6.85%, mendorong biaya penerbitan utang baru lebih tinggi. Capital outflow dari EM diperparah karena investor memilih UST yang kini menawarkan return lebih tinggi dengan risiko lebih rendah secara persepsi. Setiap basis point kenaikan yield SBN berarti tambahan beban bunga pada APBN untuk surat utang baru yang diterbitkan.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 2 -->
+    <div class="news-card" data-impact="high" data-region="oil" data-tags="iran minyak trump hormuz">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-high"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Trump Batalkan Serangan Iran; Brent Turun Sedikit ke $110/bbl Namun Pasar Tetap Waspada</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 19 Mei 2026 &nbsp;|&nbsp; 🌍 Middle East / Global &nbsp;|&nbsp; Sumber: CNBC, Trading Economics</div>
+          <div class="news-tags">
+            <span class="badge badge-dn">HIGH IMPACT</span>
+            <span class="tag">Oil</span><span class="tag">Geopolitik</span><span class="tag">Hormuz</span><span class="tag">Iran</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Presiden Trump mengumumkan pembatalan serangan militer ke Iran yang semula dijadwalkan pada Selasa (19 Mei), setelah pemimpin Arab Saudi, Qatar, dan UAE memintanya untuk "menahan diri." Trump menyatakan negosiasi serius kini sedang berlangsung meski Teheran belum mengonfirmasi klaim tersebut. Brent turun lebih dari 1% ke $110.69/bbl dan WTI ke $108.21/bbl—memberikan sedikit angin segar setelah harga minyak naik >50% sejak perang dimulai 28 Februari 2026. Namun pasar tetap skeptis karena Selat Hormuz belum dibuka dan isu nuklir Iran belum terselesaikan.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Goldman Sachs memperkirakan setiap bulan Hormuz tetap tertutup menambahkan $10 pada harga minyak di akhir tahun. Minyak di atas $100/bbl secara struktural menaikkan inflasi global, menunda pivot Fed, dan menekan neraca perdagangan negara importir minyak bersih seperti Indonesia. IEA memperingatkan demand destruction di Asia bisa menjadi yang terbesar sejak pandemi COVID-19.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Market Impact Channel</div>
+          <div class="detail-text">Harga energi tinggi → inflasi persisten → Fed hawkish → UST yield tinggi → tekanan EM. Bagi Indonesia: subsidi BBM membengkak, defisit APBN melebar, tekanan cadangan devisa meningkat karena impor minyak lebih mahal.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia</div>
+          <p>Indonesia adalah net importir minyak bersih. Setiap kenaikan $10/bbl Brent diperkirakan menambah beban subsidi energi dan tekanan defisit neraca transaksi berjalan. Q4 2025 neraca berjalan Indonesia sudah berbalik defisit akibat shortfall minyak. Rupiah yang lemah dan harga minyak tinggi menciptakan spiral tekanan yang berdampak langsung pada kemampuan pembiayaan APBN 2026.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 3 -->
+    <div class="news-card" data-impact="high" data-region="us" data-tags="moody defisit fiskal aaa">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-high"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Aftershock Downgrade Moody's: Term Premium AS Naik, "One Big Beautiful Bill" Disorot Pasar Obligasi</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 18–19 Mei 2026 (lanjutan) &nbsp;|&nbsp; 🇺🇸 United States &nbsp;|&nbsp; Sumber: Western Asset, Janus Henderson, US Bank</div>
+          <div class="news-tags">
+            <span class="badge badge-dn">HIGH IMPACT</span>
+            <span class="tag">US Credit</span><span class="tag">Fiscal</span><span class="tag">Fed</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Efek jangka menengah dari downgrade Moody's AS (Mei 2025: Aaa→Aa1) terus terasa di pasar obligasi. Pasar kini menyerap proyeksi defisit AS yang semakin melebar: CBO memproyeksikan defisit rata-rata 6.1% PDB selama dekade mendatang dengan debt-to-GDP naik dari 100% ke 120% pada 2036. Pembayaran bunga neto diproyeksikan melampaui $1 triliun tahun 2026 dan naik dua kali lipat menjadi $2.1 triliun pada 2036. OBBBA sendiri diperkirakan menambah $4.2 triliun ke defisit kumulatif.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Ini adalah pertama kalinya semua tiga lembaga rating utama (S&P 2011, Fitch 2023, Moody's 2025) menurunkan rating AS di bawah AAA. Term premium yang meningkat berarti investor meminta kompensasi lebih tinggi untuk meminjamkan uang kepada AS dalam jangka panjang—hal yang secara struktural mendorong semua yield global lebih tinggi sebagai benchmark.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Market Impact Channel</div>
+          <div class="detail-text">Peningkatan term premium → UST yield struktural lebih tinggi → repricing seluruh aset global → EM yield harus naik untuk tetap kompetitif → biaya utang negara berkembang meningkat.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia</div>
+          <p>Dalam skenario UST yield struktural lebih tinggi, SBN Indonesia harus menawarkan spread yang cukup atraktif di atas UST untuk menarik investor asing. Spread SBN-UST 10Y saat ini ~225 bps. Untuk CDS tenor 10Y di 136.95 bps (per 18 Mei 2026, berdasarkan data yang tersedia), Indonesia masih dalam kondisi yang manageable namun ruang kompresi terbatas. Pemerintah perlu mempertimbangkan strategi diversifikasi tenor dan instrumen untuk mengelola rollover risk.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 4 -->
+    <div class="news-card" data-impact="high" data-region="id" data-tags="rupiah indonesia record low">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-high"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Rupiah Sentuh Rekor Terendah Sepanjang Masa: 17.752/USD, Pelemahan ke-7 Pekan Beruntun</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 19 Mei 2026 &nbsp;|&nbsp; 🇮🇩 Indonesia &nbsp;|&nbsp; Sumber: Trading Economics, Wise, Bloomberg Technoz</div>
+          <div class="news-tags">
+            <span class="badge badge-dn">HIGH IMPACT</span>
+            <span class="tag">Rupiah</span><span class="tag">BI Rate</span><span class="tag">SBN</span><span class="tag">Indonesia</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">USD/IDR menyentuh 17,752 pada 19 Mei 2026—level terlemah sepanjang sejarah rupiah. Dalam sepekan, rupiah melemah 1.32% (high 17,752, low 17,457 pada 13 Mei). Secara year-on-year, rupiah sudah melemah 8.04%. Presiden Prabowo Subianto sebelumnya dilaporkan menegur Gubernur BI Perry Warjiyo atas pelemahan ini, meski juga menyetujui aturan devisa yang lebih ketat dan langkah likuiditas. Pemerintah juga meluncurkan Bond Stabilization Fund untuk menahan tekanan pada pasar SBN.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Kombinasi faktor: (1) USD kuat akibat yield UST tinggi dan kebijakan Fed hawkish; (2) outflow asing dari SBN dan IHSG; (3) kekhawatiran fiskal domestik; (4) defisit neraca berjalan Q4 2025 yang disebabkan shortfall perdagangan minyak. Ada spekulasi kuat BI akan menaikkan suku bunga ke 5% dari 4.75% pada rapat mendatang untuk stabilisasi.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Market Impact Channel</div>
+          <div class="detail-text">Rupiah lemah → imported inflation naik → biaya impor BBM dan bahan baku naik → tekanan pada APBN (subsidi, hutang valas) → investor asing semakin enggan masuk karena currency risk lebih tinggi.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Pemerintah</div>
+          <p>Utang pemerintah berdenominasi valas menjadi lebih mahal dalam rupiah. Setiap pelemahan Rp 100/USD pada posisi utang valas ~$180 miliar setara beban tambahan ~Rp 18 triliun. Biaya hedging meningkat. Strategi penerbitan SBN valas perlu mempertimbangkan timing yang tepat untuk meminimalkan biaya saat rupiah sangat lemah.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 5 -->
+    <div class="news-card" data-impact="high" data-region="uk" data-tags="UK inflasi CPI BoE">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-high"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">UK CPI April 2026 Dijadwalkan Rilis — Data Maret Sudah 3.3%, BoE di Persimpangan Stagflasi</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 20 Mei 2026 (rilis ONS) &nbsp;|&nbsp; 🇬🇧 United Kingdom &nbsp;|&nbsp; Sumber: ONS, BoE, MoneyWeek</div>
+          <div class="news-tags">
+            <span class="badge badge-dn">HIGH IMPACT</span>
+            <span class="tag">CPI</span><span class="tag">BoE</span><span class="tag">Inflasi</span><span class="tag">UK</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">CPI UK Maret 2026 tercatat 3.3% YoY—tertinggi sejak Desember 2022 dan naik dari 3.0% Februari. BoE dalam laporan April 2026 merevisi perkiraan inflasi Q3 2026 naik 1.4 ppts menjadi 3.3% akibat dampak konflik Iran terhadap harga energi. Data CPI April 2026 dijadwalkan rilis 20 Mei 2026 oleh ONS. Deutsche Bank memperkirakan inflasi April sedikit turun akibat base effect, namun tetap jauh di atas target 2%. BoE diperkirakan tidak akan memotong suku bunga dalam waktu dekat.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Inflasi UK yang persisten di tengah pertumbuhan lemah mencerminkan risiko stagflasi. BoE terjebak antara inflasi di atas target dan kebutuhan untuk mendukung pertumbuhan. UK memiliki ekspektasi dua kali pemotongan suku bunga di 2026 namun ini kini dipertanyakan. Sinyal hawkish dari BoE dapat memperkuat GBP dan memengaruhi aliran modal global.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Market Impact Channel</div>
+          <div class="detail-text">UK inflasi tinggi → BoE hawkish → GBP menguat → spread Gilts terhadap peers menarik investor. Namun stagflasi risk dapat menurunkan risk appetite global dan memperkuat permintaan safe haven (gold, USD).</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia</div>
+          <p>Data CPI UK yang keluar pada periode ini memberikan sinyal inflasi global yang lebih luas. Jika UK juga menunjukkan inflasi persisten, ini memperkuat narasi "higher for longer" secara global, yang berarti Fed juga akan menunda pemotongan suku bunga. Hal ini memperburuk kondisi eksternal bagi Indonesia karena spread SBN-UST menjadi kurang menarik dalam konteks risk-adjusted return.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 6 -->
+    <div class="news-card" data-impact="medium" data-region="jp" data-tags="japan BOJ CPI inflasi">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-medium"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Tokyo CPI April 1.5%, BoJ Pertahankan 0.75% — Ancaman Inflasi Energi Masih Membayangi</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 19–20 Mei 2026 &nbsp;|&nbsp; 🇯🇵 Japan &nbsp;|&nbsp; Sumber: Trading Economics, Reuters, CNBC</div>
+          <div class="news-tags">
+            <span class="badge badge-warn">MEDIUM IMPACT</span>
+            <span class="tag">BOJ</span><span class="tag">Yen</span><span class="tag">CPI Jepang</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Tokyo CPI April 2026 naik ke 1.5% dari 1.4% Maret. Data CPI nasional Jepang April (data utama) belum dirilis dalam periode coverage ini; data terakhir tersedia adalah Maret: headline 1.5%, core (ex-fresh food) 1.8%. BoJ menahan suku bunga di 0.75% namun menunjukkan bias hawkish, memperingatkan bahwa tekanan inflasi dari energi terkait Timur Tengah dapat mendorong kenaikan suku bunga lebih lanjut. Para analis memperkirakan BoJ bisa menaikkan suku bunga seawal Q3 2026 jika kondisi memungkinkan.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">BoJ yang mulai hawkish dapat memperkuat yen, mengganggu carry trade yen yang telah banyak digunakan untuk membiayai posisi di EM termasuk Indonesia. Jika yen menguat tajam, unwinding carry trade dapat memperparah outflow dari SBN dan aset EM lainnya.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia</div>
+          <p>JPY carry trade merupakan sumber pendanaan bagi sebagian investor EM. Penguatan yen atau kenaikan suku bunga BoJ dapat memicu penjualan SBN Indonesia oleh investor yang melepas posisi carry. Namun dalam jangka pendek, yen masih lemah karena diferensial suku bunga masih lebar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 7 -->
+    <div class="news-card" data-impact="medium" data-region="id" data-tags="bond stabilization fund BI SBN">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-medium"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Indonesia Luncurkan Bond Stabilization Fund; BI Diperkirakan Naikkan Suku Bunga ke 5%</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 Mei 2026 &nbsp;|&nbsp; 🇮🇩 Indonesia &nbsp;|&nbsp; Sumber: Trading Economics, Bloomberg Technoz, Kontan</div>
+          <div class="news-tags">
+            <span class="badge badge-warn">MEDIUM IMPACT</span>
+            <span class="tag">Bank Indonesia</span><span class="tag">Bond Market</span><span class="tag">APBN</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Pemerintah Indonesia meluncurkan Bond Stabilization Fund untuk menstabilkan pasar SBN di tengah tekanan yield yang meningkat dan outflow asing yang persisten. Kepemilikan asing di SBN turun ke ~12.75% dari ~14.36% setahun lalu. BI diperkirakan akan menaikkan suku bunga acuan ke 5% dari 4.75% pada rapat mendatang—langkah yang didorong oleh pelemahan rupiah ke rekor terendah dan kekhawatiran imported inflation.</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Bond Stabilization Fund menunjukkan komitmen pemerintah menjaga stabilitas pasar SBN, namun efektivitasnya tergantung pada besaran dana dan kepercayaan pasar. Kenaikan BI rate ke 5% akan meningkatkan yield SRBI dan SBN jangka pendek, potensial menarik modal kembali namun juga meningkatkan biaya pinjaman domestik.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Pemerintah</div>
+          <p>Dari perspektif manajemen utang: kenaikan BI rate akan meningkatkan kupon SBN baru yang perlu diterbitkan. Strategi mitigasi bisa berupa meningkatkan porsi SBN floating rate atau memperpendek durasi penerbitan sambil menunggu kondisi pasar membaik. Bond Stabilization Fund juga berperan sebagai "market maker of last resort" untuk SBN.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS 8 -->
+    <div class="news-card" data-impact="medium" data-region="us" data-tags="Fed Kevin Warsh chairman">
+      <div class="news-header" onclick="toggleNews(this)">
+        <div class="news-impact-dot impact-medium"></div>
+        <div class="news-body-text">
+          <div class="news-title-row">
+            <div class="news-headline">Kevin Warsh Resmi Gantikan Powell sebagai Fed Chair — Pasar Monitor Pergeseran Arah Kebijakan</div>
+            <div class="expand-icon">▼</div>
+          </div>
+          <div class="news-meta">🕐 16 Mei 2026 (efektif) / ongoing &nbsp;|&nbsp; 🇺🇸 United States &nbsp;|&nbsp; Sumber: Motley Fool, Bloomberg</div>
+          <div class="news-tags">
+            <span class="badge badge-warn">MEDIUM IMPACT</span>
+            <span class="tag">Fed</span><span class="tag">Kebijakan Moneter</span><span class="tag">USD</span>
+          </div>
+        </div>
+      </div>
+      <div class="news-detail">
+        <div class="detail-section">
+          <div class="detail-label">Apa yang terjadi</div>
+          <div class="detail-text">Kevin Warsh secara resmi menggantikan Jerome Powell sebagai Ketua Federal Reserve efektif 16 Mei 2026. Pasar memantau apakah Warsh akan mengambil pendekatan berbeda dari Powell, terutama mengingat tekanan dari Presiden Trump yang menginginkan pemotongan suku bunga. Namun Warsh secara historis dikenal sebagai tokoh yang lebih hawkish. FOMC target rate saat ini berada di 3.50–3.75% (setelah tiga kali pemotongan di H2 2025).</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mengapa penting</div>
+          <div class="detail-text">Transisi kepemimpinan Fed di tengah tekanan inflasi energi dan lonjakan yield jangka panjang menciptakan ketidakpastian kebijakan moneter. Pasar khawatir Warsh akan menghadapi tekanan politik untuk memotong suku bunga lebih awal meskipun inflasi masih elevated, yang dapat memperburuk kredibilitas Fed dan mendorong term premium lebih tinggi.</div>
+        </div>
+        <div class="detail-idr">
+          <div class="detail-label">🇮🇩 Relevansi Indonesia</div>
+          <p>Kebijakan Fed yang tidak pasti atau terpolitisasi dapat meningkatkan volatilitas pasar global dan memperburuk kondisi EM. Kepercayaan terhadap independensi Fed adalah salah satu anchor stabilitas keuangan global. Pemotongan suku bunga prematur oleh Fed bisa memperburuk inflasi global dan mendorong pengetatan ulang yang lebih agresif—skenario buruk bagi EM.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end newsList -->
+</div>
+<!-- ===== END BERITA ===== -->
+
+<!-- ===== KALENDER EKONOMI TAB ===== -->
+<div class="tab-content" id="tab-calendar">
+  <div class="filter-bar">
+    <input type="text" id="calSearch" placeholder="🔍 Cari indikator, negara..." oninput="filterCalendar()"/>
+    <button class="filter-btn active" onclick="setCalFilter('all',this)">Semua</button>
+    <button class="filter-btn" onclick="setCalFilter('H',this)">🔴 High</button>
+    <button class="filter-btn" onclick="setCalFilter('M',this)">🟠 Medium</button>
+  </div>
+  <div class="table-scroll">
+    <table id="calendarTable">
+      <colgroup>
+        <col class="col-time"/><col class="col-country"/><col class="col-indicator"/>
+        <col class="col-impact"/><col class="col-actual"/><col class="col-forecast"/>
+        <col class="col-previous"/><col class="col-surprise"/><col class="col-interpretation"/>
+        <col class="col-market"/>
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="col-time">Waktu (WIB)</th>
+          <th class="col-country">Negara</th>
+          <th class="col-indicator">Indikator</th>
+          <th class="col-impact">Impact</th>
+          <th class="col-actual">Aktual</th>
+          <th class="col-forecast">Forecast</th>
+          <th class="col-previous">Sebelumnya</th>
+          <th class="col-surprise">Surprise</th>
+          <th class="col-interpretation">Interpretasi Singkat</th>
+          <th class="col-market">Market Impact Channel</th>
+        </tr>
+      </thead>
+      <tbody id="calendarBody">
+        <tr data-impact="H" data-country="UK">
+          <td class="col-time">13:00</td>
+          <td class="col-country">🇬🇧 UK</td>
+          <td class="col-indicator">CPI YoY – April 2026 (ONS)</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="pending">data pending verification</span></td>
+          <td class="col-forecast">~2.8–3.0% (est. sedikit turun dari Mar)</td>
+          <td class="col-previous">3.3% (Mar 2026)</td>
+          <td class="col-surprise">—</td>
+          <td class="col-interpretation">Dijadwalkan rilis hari ini oleh ONS. Ekspektasi penurunan tipis akibat base effect April 2025 yang tinggi. Namun konflik Iran menjaga tekanan energi. BoE tidak akan turunkan rate jika inflasi tetap di atas 3%.</td>
+          <td class="col-market">GBP, Gilts, BoE rate expectations, global inflation narrative</td>
+        </tr>
+        <tr data-impact="H" data-country="JP">
+          <td class="col-time">00:30* (22 Mei)</td>
+          <td class="col-country">🇯🇵 Japan</td>
+          <td class="col-indicator">National CPI YoY – April 2026</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="pending">data pending verification</span></td>
+          <td class="col-forecast">~1.8–2.0% est. (berdasarkan Tokyo leading)</td>
+          <td class="col-previous">1.5% (Mar 2026)</td>
+          <td class="col-surprise">—</td>
+          <td class="col-interpretation">Tokyo CPI April naik ke 1.5% (dari 1.4%), memberikan leading signal bahwa national CPI April bisa sedikit naik. Ekspektasi kenaikan BoJ pada Q3 2026 semakin kuat jika inflasi meningkat.</td>
+          <td class="col-market">JPY/USD, JGB yields, BoJ expectations, EM carry trade</td>
+        </tr>
+        <tr data-impact="H" data-country="US">
+          <td class="col-time">Sesi AS (19 Mei)</td>
+          <td class="col-country">🇺🇸 AS</td>
+          <td class="col-indicator">UST 30Y Yield (Market-driven)</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="actual-miss">5.189%</span></td>
+          <td class="col-forecast">—</td>
+          <td class="col-previous">~4.90% (akhir pekan lalu)</td>
+          <td class="col-surprise">Negative — lonjakan besar</td>
+          <td class="col-interpretation">Yield 30Y mencapai level tertinggi sejak 2007, merefleksikan fiscal distress AS dan term premium yang melonjak. Ini adalah sinyal pasar obligasi, bukan data resmi, namun berdampak market-moving setara data H.</td>
+          <td class="col-market">Global bonds, equities repricing, USD, EM capital flows</td>
+        </tr>
+        <tr data-impact="H" data-country="ID">
+          <td class="col-time">Sepanjang hari (19 Mei)</td>
+          <td class="col-country">🇮🇩 Indonesia</td>
+          <td class="col-indicator">USD/IDR Exchange Rate (Market)</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="actual-miss">17,752</span></td>
+          <td class="col-forecast">—</td>
+          <td class="col-previous">~17,457 (13 Mei, weekly low)</td>
+          <td class="col-surprise">Negative — rekor terendah baru</td>
+          <td class="col-interpretation">Rupiah mencetak rekor terendah sepanjang sejarah, didorong kombinasi strong USD, outflow SBN, defisit neraca berjalan, dan sentimen global risk-off. Intervensi BI dilaporkan terbatas.</td>
+          <td class="col-market">Rupiah, yield SBN, imported inflation, APBN, cadangan devisa</td>
+        </tr>
+        <tr data-impact="M" data-country="UK">
+          <td class="col-time">13:00</td>
+          <td class="col-country">🇬🇧 UK</td>
+          <td class="col-indicator">Core CPI YoY – April 2026</td>
+          <td class="col-impact"><span class="impact-letter medium" title="Medium impact">M</span></td>
+          <td class="col-actual"><span class="pending">data pending verification</span></td>
+          <td class="col-forecast">~3.4–3.5% est.</td>
+          <td class="col-previous">3.4% (Mar 2026)</td>
+          <td class="col-surprise">—</td>
+          <td class="col-interpretation">Services inflation UK masih sangat elevated. BoE April MPR memperkirakan CPI bertahan 3–3.5% di Q2–Q3 2026. Pemotongan suku bunga menjadi sangat tidak mungkin dalam jangka dekat.</td>
+          <td class="col-market">GBP, BoE forward guidance, UK Gilts</td>
+        </tr>
+        <tr data-impact="M" data-country="JP">
+          <td class="col-time">Data tersedia</td>
+          <td class="col-country">🇯🇵 Japan</td>
+          <td class="col-indicator">Tokyo CPI YoY – April 2026</td>
+          <td class="col-impact"><span class="impact-letter medium" title="Medium impact">M</span></td>
+          <td class="col-actual"><span class="actual-beat">1.5%</span></td>
+          <td class="col-forecast">—</td>
+          <td class="col-previous">1.4% (Mar 2026)</td>
+          <td class="col-surprise">Inline/slight positive</td>
+          <td class="col-interpretation">Tokyo CPI naik tipis—leading indicator untuk National CPI yang dirilis beberapa minggu kemudian. Kenaikan ini didorong transportasi dan biaya hidup yang terpengaruh harga energi global.</td>
+          <td class="col-market">JPY, JGB, BoJ rate expectations</td>
+        </tr>
+        <tr data-impact="M" data-country="JP">
+          <td class="col-time">Apr 2026 (data)</td>
+          <td class="col-country">🇯🇵 Japan</td>
+          <td class="col-indicator">BoJ Policy Rate</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="actual-inline">0.75% (tahan)</span></td>
+          <td class="col-forecast">0.75% (tahan)</td>
+          <td class="col-previous">0.75%</td>
+          <td class="col-surprise">Inline</td>
+          <td class="col-interpretation">BoJ tahan 28 April 2026, memperingatkan cooldown pertumbuhan dan tekanan inflasi energi dari konflik Timur Tengah. Bias hawkish dipertahankan dengan sinyal kenaikan bertahap jika outlook membaik.</td>
+          <td class="col-market">JPY, JGB 10Y, EM carry trade, global liquidity</td>
+        </tr>
+        <tr data-impact="M" data-country="US">
+          <td class="col-time">Apr 2026</td>
+          <td class="col-country">🇺🇸 AS</td>
+          <td class="col-indicator">S&P Global US Manufacturing PMI Final</td>
+          <td class="col-impact"><span class="impact-letter medium" title="Medium impact">M</span></td>
+          <td class="col-actual"><span class="actual-beat">54.5</span></td>
+          <td class="col-forecast">54.0</td>
+          <td class="col-previous">52.3 (Mar)</td>
+          <td class="col-surprise">Positive surprise</td>
+          <td class="col-interpretation">PMI manufaktur AS April tertinggi sejak Mei 2022, didorong produksi dan pesanan baru yang kuat. Namun beberapa kenaikan bersumber dari stockpiling menjelang gangguan pasokan terkait Iran, bukan murni demand organik.</td>
+          <td class="col-market">USD, Fed hold expectations, US equities cyclicals</td>
+        </tr>
+        <tr data-impact="M" data-country="ID">
+          <td class="col-time">Q1 2026</td>
+          <td class="col-country">🇮🇩 Indonesia</td>
+          <td class="col-indicator">GDP Growth Q1 2026 YoY</td>
+          <td class="col-impact"><span class="impact-letter high" title="High impact">H</span></td>
+          <td class="col-actual"><span class="actual-beat">5.61%</span></td>
+          <td class="col-forecast">~5.3%</td>
+          <td class="col-previous">5.11% (FY 2025)</td>
+          <td class="col-surprise">Positive surprise</td>
+          <td class="col-interpretation">Pertumbuhan ekonomi Indonesia Q1 2026 mencapai 5.61% YoY—tertinggi sejak akhir 2022—didorong konsumsi swasta, pengeluaran pemerintah, dan investasi tetap. Fundamental positif ini belum cukup untuk menahan tekanan eksternal.</td>
+          <td class="col-market">Rupiah sentiment, sovereign risk, investor confidence</td>
+        </tr>
+        <tr data-impact="M" data-country="ID">
+          <td class="col-time">Apr 2026</td>
+          <td class="col-country">🇮🇩 Indonesia</td>
+          <td class="col-indicator">CPI YoY – April 2026</td>
+          <td class="col-impact"><span class="impact-letter medium" title="Medium impact">M</span></td>
+          <td class="col-actual"><span class="actual-beat">2.42%</span></td>
+          <td class="col-forecast">~2.5%</td>
+          <td class="col-previous">~2.7% (Mar)</td>
+          <td class="col-surprise">Positive (turun, bawah target)</td>
+          <td class="col-interpretation">Inflasi Indonesia April 2026 turun ke 2.42%—8-month low—dan berada nyaman dalam target BI 1.5–3.5%. Ini memberi sedikit ruang untuk BI menahan suku bunga, namun tekanan rupiah membuat kenaikan suku bunga tetap diperlukan untuk stabilisasi.</td>
+          <td class="col-market">BI rate decision, IDR, cost-push inflation risk</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-legend">H = High impact; M = Medium impact. *Waktu perkiraan. Surprise dinilai secara kontekstual berdasarkan karakter indikator. Data yang belum tersedia dalam periode coverage diberi label "data pending verification".</div>
+</div>
+<!-- ===== END CALENDAR ===== -->
+
+<!-- ===== PASAR GLOBAL TAB ===== -->
+<div class="tab-content" id="tab-pasar">
+  <div class="view-toggle">
+    <button class="view-btn active" onclick="showView('equities',this)">📈 Ekuitas</button>
+    <button class="view-btn" onclick="showView('bonds',this)">📊 Obligasi</button>
+    <button class="view-btn" onclick="showView('forex',this)">💱 Valas</button>
+  </div>
+
+  <div class="view-section active" id="view-equities">
+    <h3 class="section-title" style="font-size:18px;">Indeks Saham Global</h3>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 S&P 500</div>
+        <div class="stat-value">7,353.61</div>
+        <div class="stat-change chg-dn arrow-dn">−0.67%</div>
+        <div class="stat-note">3 sesi merah berturut. Tech dan discretionary turun paling dalam.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 Nasdaq Composite</div>
+        <div class="stat-value">25,870.71</div>
+        <div class="stat-change chg-dn arrow-dn">−0.84%</div>
+        <div class="stat-note">Short position Nasdaq futures meningkat (semiconductor selloff).</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 DJIA</div>
+        <div class="stat-value">49,363.88</div>
+        <div class="stat-change chg-dn arrow-dn">−0.65% (−322 pts)</div>
+        <div class="stat-note">Home Depot earnings beat tidak cukup angkat sentimen.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 Russell 2000</div>
+        <div class="stat-value">—</div>
+        <div class="stat-change chg-dn arrow-dn">−1.33%</div>
+        <div class="stat-note">Small cap paling terpukul. Industri, material, dan tech turun.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇩🇪 DAX</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-up">Advance (19 Mei)</div>
+        <div class="stat-note">Indeks Eropa advance, berlawanan dengan AS.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇯🇵 Nikkei 225</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn arrow-dn">−1.0% (18 Mei)</div>
+        <div class="stat-note">Asia melemah mengikuti sentimen global negatif.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇭🇰 Hang Seng</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn arrow-dn">−1.5% (18 Mei)</div>
+        <div class="stat-note">China data industrial prod & retail sales di bawah ekspektasi.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇨🇳 Shanghai Composite</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn arrow-dn">−0.5% (18 Mei)</div>
+        <div class="stat-note">Data ekonomi China mengecewakan tekan sentimen.</div>
+      </div>
+    </div>
+    <p class="table-legend" style="margin-top:12px;">Catatan: Data pasar Asia tertanggal 18 Mei (penutupan sebelum coverage period). Data AS tertanggal 19 Mei (sesi penutupan). Data "pending" belum dapat dikonfirmasi dari sumber yang tersedia dalam periode ini.</p>
+  </div>
+
+  <div class="view-section" id="view-bonds">
+    <h3 class="section-title" style="font-size:18px;">Yield Obligasi Pemerintah</h3>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 UST 2Y</div>
+        <div class="stat-value">~3.99%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Rising</span></div>
+        <div class="stat-note">Rising yield = tekanan untuk bonds</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 UST 10Y</div>
+        <div class="stat-value">4.687%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ 16-month high</span></div>
+        <div class="stat-note">Rising = negatif untuk obligasi & EM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 UST 20Y</div>
+        <div class="stat-value">5.189%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Near 2-decade high</span></div>
+        <div class="stat-note">Rising = sinyal distress fiskal AS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇺🇸 UST 30Y</div>
+        <div class="stat-value">5.171%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Tertinggi ~19 tahun</span></div>
+        <div class="stat-note">Rising = alarm pasar obligasi global</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇮🇩 SBN 10Y</div>
+        <div class="stat-value">6.85%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ 3-week high</span></div>
+        <div class="stat-note">Rising = tekanan biaya utang Indonesia. Spread UST ~225 bps.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇮🇩 SBN 5Y</div>
+        <div class="stat-value">~6.33%</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Naik dari 6.29%</span></div>
+        <div class="stat-note">Rising = tekanan tenor menengah</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🇯🇵 JGB 10Y</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn"><span class="badge badge-dn">▲ Tekanan dari BoJ hawkish</span></div>
+        <div class="stat-note">Rising = perubahan rezim BoJ berdampak EM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">CDS Indonesia 5Y</div>
+        <div class="stat-value">~81–137 bps</div>
+        <div class="stat-change chg-dn"><span class="badge badge-warn">Elevated</span></div>
+        <div class="stat-note">CDS 5Y ~81.52 bps; CDS 10Y ~136.95 bps (per 18 Mei)</div>
+      </div>
+    </div>
+    <p class="table-legend" style="margin-top:12px;">Konvensi: Rising yield = kondisi negatif untuk pemegang obligasi (harga turun). Badge merah = yield naik = negatif untuk pasar obligasi.</p>
+  </div>
+
+  <div class="view-section" id="view-forex">
+    <h3 class="section-title" style="font-size:18px;">Nilai Tukar Utama</h3>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="stat-label">USD/IDR</div>
+        <div class="stat-value">17,752</div>
+        <div class="stat-change chg-dn arrow-dn">+0.35% (IDR melemah)</div>
+        <div class="stat-note">Rekor terendah sepanjang sejarah. −8.04% YoY.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">EUR/USD</div>
+        <div class="stat-value">~1.1680</div>
+        <div class="stat-change chg-up arrow-up">EUR menguat vs USD</div>
+        <div class="stat-note">EUR area equities advance. EUR/USD di bawah 1.17.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">USD/JPY</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn">Yen lemah berlanjut</div>
+        <div class="stat-note">BoJ hawkish bias belum cukup angkat yen secara signifikan.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">DXY (USD Index)</div>
+        <div class="stat-value">data pending</div>
+        <div class="stat-change chg-dn">Mixed — EUR angkat, IDR tekan</div>
+        <div class="stat-note">USD mixed: kuat vs EM, lemah vs EUR akibat risk-off selektif.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ===== END PASAR GLOBAL ===== -->
+
+<!-- ===== INDONESIA TAB ===== -->
+<div class="tab-content" id="tab-indonesia">
+  <div class="idr-panel">
+    <h3>🇮🇩 Implikasi untuk Indonesia, SBN, dan APBN</h3>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Pembiayaan Utang:</strong> Yield SBN 10Y di 6.85% (~3-week high) memperbesar biaya penerbitan utang baru. Setiap kenaikan 10 bps yield pada emisi baru bernilai triliunan rupiah biaya tambahan per tahun untuk ukuran penerbitan yang signifikan.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Kepemilikan Asing SBN:</strong> Turun ke ~12.75% dari 14.36% setahun lalu. Meski lebih rendah dari puncak historis 40%, tren penurunan berlanjut menunjukkan berkurangnya kepercayaan investor asing. Bond Stabilization Fund merupakan langkah positif namun perlu dikombinasikan dengan kebijakan fundamental yang meyakinkan.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Rupiah:</strong> USD/IDR 17,752 (rekor) memperburuk beban utang valas dalam IDR. Intervensi BI terbatas oleh cadangan devisa yang tertekan. BI diperkirakan naikkan suku bunga ke 5% untuk stabilisasi—yang akan menaikkan yield SRBI dan SBN jangka pendek, berpotensi menarik modal kembali namun memperlambat pertumbuhan kredit.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>APBN:</strong> Harga minyak di atas $108/bbl meningkatkan subsidi BBM dan tekanan defisit. Rupiah lemah memperburuk biaya impor energi. Q1 GDP 5.61% memberikan buffer pertumbuhan yang positif, namun risiko fiskal 2026 meningkat dari skenario energi dan depresiasi.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Capital Flow:</strong> Outflow dari SBN berlanjut (~Rp 11.6 T di Maret, April mulai ada perbaikan kecil). SRBI tetap menarik untuk asing (porsi asing naik dari Rp 121.9T ke Rp 143.9T di Q1). Diversifikasi basis investor domestik menjadi krusial—perbankan, asuransi, dan BPJS menjadi absorber utama.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Risk Appetite:</strong> Sentimen global risk-off dengan konflik Iran dan tekanan fiskal AS tidak mendukung risk-on di EM. IHSG tetap di bawah tekanan. Pemulihan bertahap diperkirakan namun bergantung pada stabilitas nilai tukar dan kepastian kebijakan fiskal-moneter domestik.</div></div>
+    <div class="idr-row"><div class="idr-dot"></div><div class="idr-text"><strong>Sovereign Risk Premium:</strong> CDS 5Y ~81.52 bps, CDS 10Y ~136.95 bps. Dalam skenario tekanan ganda (UST yield naik + CDS naik), simulasi menunjukkan yield SBN bisa mencapai 7.45%, dengan IDR berpotensi melemah ke 18.200–18.550. IHSG berpotensi turun ke 5.600–5.950 dalam skenario stres.</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Kepemilikan SBN</div>
+      <div style="margin-bottom:12px;">
+        <div class="stat-label">Investor Asing</div>
+        <div style="font-size:20px;font-weight:700;color:var(--red);">12.75%</div>
+        <div style="font-size:12px;color:var(--text-muted);">dari total SBN beredar (awal Mei 2026)</div>
+        <div style="height:8px;background:var(--border);border-radius:4px;margin:8px 0;overflow:hidden;">
+          <div style="height:100%;width:12.75%;background:var(--primary);border-radius:4px;"></div>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="stat-label">Bank Indonesia (gross)</div>
+        <div style="font-size:20px;font-weight:700;color:var(--primary);">24.45%</div>
+        <div style="height:8px;background:var(--border);border-radius:4px;margin:8px 0;overflow:hidden;">
+          <div style="height:100%;width:24.45%;background:var(--gold);border-radius:4px;"></div>
+        </div>
+      </div>
+      <div>
+        <div class="stat-label">Nilai Kepemilikan Asing (Apr 2026)</div>
+        <div style="font-size:18px;font-weight:700;">Rp 862.36 T</div>
+        <div style="font-size:12px;color:var(--text-muted);">Turun dari Rp 878.75T (Jan 2026) dan Rp 899.66T (Apr 2025)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Indikator Domestik</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div><div class="stat-label">GDP Q1 2026 (YoY)</div><div style="font-size:20px;font-weight:700;color:var(--green);">5.61%</div><div style="font-size:12px;color:var(--text-muted);">Tertinggi sejak akhir 2022. Driven by konsumsi &amp; investasi.</div></div>
+        <div><div class="stat-label">CPI April 2026 (YoY)</div><div style="font-size:20px;font-weight:700;color:var(--green);">2.42%</div><div style="font-size:12px;color:var(--text-muted);">8-month low. Dalam target BI 1.5–3.5%.</div></div>
+        <div><div class="stat-label">BI Rate (saat ini)</div><div style="font-size:20px;font-weight:700;">4.75%</div><div style="font-size:12px;color:var(--orange);">Diperkirakan naik ke 5% pada rapat mendatang.</div></div>
+        <div><div class="stat-label">SRBI Outstanding (Apr 2026)</div><div style="font-size:20px;font-weight:700;">Rp 885.4 T</div><div style="font-size:12px;color:var(--text-muted);">Naik Rp 54.2T MoM. Instrumen alternatif yang menarik.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ===== END INDONESIA ===== -->
+
+<!-- ===== KOMODITAS TAB ===== -->
+<div class="tab-content" id="tab-komoditas">
+  <h2 class="section-title">Komoditas — Energi, Logam, Pangan</h2>
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <div class="stat-label">⛽ Brent Crude (Jul delivery)</div>
+      <div class="stat-value">~$110.69</div>
+      <div class="stat-change chg-dn arrow-dn">−1.1% (dari $112+)</div>
+      <div class="stat-note">Turun setelah Trump delay serangan Iran. Tapi masih +50% sejak Feb 28. Volatile.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">⛽ WTI (Jun delivery)</div>
+      <div class="stat-value">~$108.21</div>
+      <div class="stat-change chg-dn arrow-dn">−0.4%</div>
+      <div class="stat-note">Mengikuti Brent. Selat Hormuz masih terdampak, pasokan terganggu.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🥇 Gold (Spot)</div>
+      <div class="stat-value">$4,550</div>
+      <div class="stat-change chg-up arrow-up">Safe haven demand kuat</div>
+      <div class="stat-note">Goldman Sachs target $5,400 akhir 2026. CB beli 60 ton/bulan rata-rata.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🥈 Silver</div>
+      <div class="stat-value">data pending</div>
+      <div class="stat-change chg-up">Ikuti gold</div>
+      <div class="stat-note">Dipengaruhi same drivers: safe haven + industrial demand.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Analisis Energi — Konteks Konflik Iran</div>
+    <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">
+      Harga minyak dunia naik lebih dari <strong>50%</strong> sejak konflik AS-Iran dimulai 28 Februari 2026. Meski Trump membatalkan serangan terencana pada 19 Mei dan menyebut negosiasi sedang berlangsung, pasar tetap skeptis karena:
+    </p>
+    <ul style="padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:2;">
+      <li>Selat Hormuz masih efektif tertutup bagi sebagian besar tanker</li>
+      <li>Iran belum mengonfirmasi secara resmi dimulainya negosiasi substansial</li>
+      <li>Isu nuklir Iran masih menjadi hambatan utama perjanjian</li>
+      <li>Goldman Sachs: setiap bulan Hormuz tertutup tambahkan $10/bbl ke proyeksi akhir tahun</li>
+      <li>IEA memproyeksikan demand destruction di Asia sebesar 1.5 juta bph Q2 2026—terbesar sejak COVID</li>
+    </ul>
+    <div style="margin-top:14px;padding:12px;background:var(--orange-light);border-radius:var(--radius-sm);border-left:3px solid var(--orange);">
+      <strong style="font-size:12px;color:var(--orange);">IMPLIKASI INDONESIA:</strong>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Setiap kenaikan $10/bbl Brent meningkatkan biaya impor minyak Indonesia secara signifikan, memperburuk defisit neraca berjalan yang sudah berbalik merah di Q4 2025. Tekanan fiskal meningkat dari sisi subsidi BBM dan risiko inflasi imported energy.</p>
+    </div>
+  </div>
+</div>
+<!-- ===== END KOMODITAS ===== -->
+
+<!-- ===== KRIPTO TAB ===== -->
+<div class="tab-content" id="tab-kripto">
+  <h2 class="section-title">Pasar Kripto</h2>
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <div class="stat-label">₿ Bitcoin (BTC)</div>
+      <div class="stat-value">$76,565</div>
+      <div class="stat-change chg-dn arrow-dn">−$783 vs kemarin pagi</div>
+      <div class="stat-note">~$29,000 di bawah level setahun lalu. F&G: 28 (Fear).</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Ξ Ethereum (ETH)</div>
+      <div class="stat-value">Market cap ~$233B</div>
+      <div class="stat-change chg-dn">Tekanan bersama BTC</div>
+      <div class="stat-note">BTC dominance tetap kuat. ETH tertinggal dari BTC secara relatif.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Crypto F&G Index</div>
+      <div class="stat-value">28</div>
+      <div class="stat-change chg-dn"><span class="badge badge-dn">FEAR</span></div>
+      <div class="stat-note">Sumber: CoinMarketCap/CoinGecko. Berbeda dari CNN Stock F&G.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">CNN Stock F&G Index</div>
+      <div class="stat-value">61</div>
+      <div class="stat-change chg-up"><span class="badge badge-up">GREED</span></div>
+      <div class="stat-note">Sumber: CNN Markets (19 Mei 2026). Divergensi menarik: ekuitas greed, kripto fear.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Konteks & Analisis</div>
+    <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+      Bitcoin berada di level ~$76,565 pada 19 Mei—jauh di bawah puncaknya dan sekitar $29,000 lebih rendah dari setahun lalu. Penurunan ini mencerminkan tekanan makro yang kuat: ekspektasi suku bunga Fed yang lebih tinggi lebih lama mengurangi daya tarik aset spekulatif berisiko tinggi. Lonjakan UST yield dan kekhawatiran fiskal AS mendorong rotasi ke safe haven tradisional (emas) ketimbang kripto. Divergensi menarik terlihat antara CNN Stock F&G (61, Greed) dan Crypto F&G (28, Fear)—mengindikasikan investor tradisional masih optimistik terhadap ekuitas meski khawatir, sementara investor kripto dalam mode fear yang lebih dalam.
+    </p>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--blue-light);border-radius:var(--radius-sm);border-left:3px solid var(--blue);">
+      <strong style="font-size:12px;color:var(--blue);">Catatan Relevansi:</strong>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Pasar kripto tidak langsung relevan bagi pembiayaan utang Indonesia. Namun sebagai indikator risk appetite global, melemahnya kripto bersamaan dengan kenaikan yield UST mengindikasikan kondisi likuiditas global yang semakin ketat—negatif bagi EM secara umum.</p>
+    </div>
+  </div>
+</div>
+<!-- ===== END KRIPTO ===== -->
+
+<!-- ===== WATCHLIST TAB ===== -->
+<div class="tab-content" id="tab-watchlist">
+  <h2 class="section-title">Watchlist — Agenda & Risiko Periode Mendatang</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📅 Data Ekonomi yang Ditunggu</div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇬🇧</div>
+        <div class="watchlist-text"><strong>UK CPI April 2026 — Rilis 20 Mei 2026</strong><p>ONS merilis hari ini. Konsensus turun ke ~2.8–3.0% akibat base effect, namun tetap di atas target BoE 2%. Implikasi bagi BoE rate outlook dan Gilts.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇯🇵</div>
+        <div class="watchlist-text"><strong>Japan National CPI April 2026 — ~23 Mei</strong><p>Diperkirakan naik moderat berdasarkan leading indicator Tokyo CPI. Akan perkuat atau perlemah ekspektasi kenaikan BoJ di Q3 2026.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇺🇸</div>
+        <div class="watchlist-text"><strong>Flash PMI Global Mei 2026 — ~22 Mei</strong><p>S&P Global Flash PMI (AS, Eurozone, UK) akan memberikan signal awal aktivitas bisnis di tengah gangguan Iran dan inflasi energi.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇮🇩</div>
+        <div class="watchlist-text"><strong>Rapat BI — Akhir Mei 2026</strong><p>Bank Indonesia diperkirakan menaikkan BI Rate ke 5% dari 4.75% untuk stabilisasi rupiah. Keputusan ini akan sangat mempengaruhi yield SBN dan kondisi pembiayaan.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇮🇩</div>
+        <div class="watchlist-text"><strong>Lelang SBN Mingguan Indonesia</strong><p>Demand dan bid-to-cover ratio lelang SBN berikutnya akan menjadi barometer nyata kepercayaan investor terhadap risiko Indonesia di tengah kondisi saat ini.</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚠️ Risiko & Event yang Perlu Dipantau</div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🛢️</div>
+        <div class="watchlist-text"><strong>Negosiasi Iran–AS</strong><p>Keberhasilan atau kegagalan negosiasi akan menjadi penggerak terbesar harga minyak. Pembukaan kembali Selat Hormuz bisa menekan Brent ke $80–85/bbl; eskalasi bisa mendorong ke $130+.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🏛️</div>
+        <div class="watchlist-text"><strong>OBBBA — Perjalanan di Senat AS</strong><p>Setelah lolos DPR, "One Big Beautiful Bill" menuju Senat AS. Amandemen yang menambah atau mengurangi defisit akan bergerakkan UST yield dan DXY.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🏦</div>
+        <div class="watchlist-text"><strong>Kevin Warsh / FOMC — Komunikasi Kebijakan</strong><p>Pasar memantau apakah Warsh akan memberikan sinyal hawkish atau akomodatif. Pidato atau testimony apa pun akan bergerakkan pasar secara signifikan.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">🇨🇳</div>
+        <div class="watchlist-text"><strong>China — Data Ekonomi & Pembelian Agrikultur AS</strong><p>China industrial production dan retail sales April di bawah ekspektasi. White House umumkan China beli $17B+ agrikultur AS tahunan. Perkembangan ini memengaruhi global trade outlook.</p></div>
+      </div>
+      <div class="watchlist-item">
+        <div class="watchlist-icon">💱</div>
+        <div class="watchlist-text"><strong>USD/IDR & Cadangan Devisa</strong><p>Monitor apakah rupiah tembus 18.000 dan respons BI. Perlu pantau data cadangan devisa terbaru BI untuk menilai kapasitas intervensi.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ===== END WATCHLIST ===== -->
+
+<!-- ===== METODOLOGI TAB ===== -->
+<div class="tab-content" id="tab-metodologi">
+  <h2 class="section-title">Metodologi & Sumber</h2>
+  <div class="source-box">
+    <h4>📅 Periode Coverage</h4>
+    <p>19 Mei 2026, 06:01 WIB – 20 Mei 2026, 06:00 WIB (UTC+7 / Asia/Jakarta). Data pasar menggunakan harga penutupan atau data tersedia terakhir sebelum waktu cutoff.</p>
+  </div>
+  <div class="source-box">
+    <h4>📰 Sumber Berita</h4>
+    <ul>
+      <li>Reuters, Bloomberg, CNBC, CNN Business, Financial Times, Wall Street Journal</li>
+      <li>Motley Fool, The Street, Patronus Partners, CaixaBank Research</li>
+      <li>MoneyWeek (UK CPI), Channel News Asia (Asia Pacific)</li>
+      <li>Kontan, Bloomberg Technoz, SahamDaily (Indonesia-specific)</li>
+    </ul>
+  </div>
+  <div class="source-box">
+    <h4>📊 Sumber Data Pasar & Ekonomi</h4>
+    <ul>
+      <li>Trading Economics (data pasar primer: harga minyak, rupiah, yield SBN, CPI Jepang)</li>
+      <li>Office for National Statistics UK / ONS (UK CPI)</li>
+      <li>Statistics Bureau of Japan (Japan CPI)</li>
+      <li>S&P Global PMI (PMI data)</li>
+      <li>CNN Markets (Fear & Greed Index – stock market)</li>
+      <li>CoinMarketCap / CoinGecko (Crypto Fear & Greed Index)</li>
+      <li>Wise.com, Xe.com (cross-reference USD/IDR)</li>
+      <li>DJPPR Kemenkeu RI (kepemilikan SBN)</li>
+      <li>Bank Indonesia (BI rate, SRBI data)</li>
+    </ul>
+  </div>
+  <div class="source-box">
+    <h4>⚙️ Metodologi Impact Classification</h4>
+    <ul>
+      <li><strong>High Impact:</strong> Event atau data yang berpotensi mengubah ekspektasi pasar terhadap suku bunga, inflasi, pertumbuhan, risiko fiskal/sovereign, geopolitik, energi, atau capital flow EM.</li>
+      <li><strong>Medium Impact:</strong> Relevan namun dampaknya lebih terbatas, sektoral, atau memerlukan konfirmasi lebih lanjut.</li>
+      <li><strong>Surprise Classification:</strong> Dinilai secara kontekstual—mempertimbangkan karakter indikator (inflasi tinggi = negatif untuk bonds; GDP tinggi = positif growth namun negatif untuk obligasi jika naikkan rate expectations).</li>
+    </ul>
+  </div>
+  <div class="source-box">
+    <h4>⚠️ Disclaimer</h4>
+    <p>Dashboard ini merupakan alat pemantauan pasar. Seluruh interpretasi bersifat analytical monitoring dan <strong>bukan merupakan rekomendasi investasi</strong>. Data yang belum dapat diverifikasi dalam periode coverage diberi label "data pending verification." Harga pasar bersifat indikatif. Keputusan kebijakan harus menggunakan data resmi dari sumber primer yang berwenang.</p>
+  </div>
+</div>
+<!-- ===== END METODOLOGI ===== -->
+
+</div><!-- end main -->
+
+<script>
+// TAB SWITCHING
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// NEWS EXPAND/COLLAPSE
+function toggleNews(header) {
+  const detail = header.nextElementSibling;
+  const icon = header.querySelector('.expand-icon');
+  detail.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+// NEWS FILTER
+let newsFilter = 'all';
+function setNewsFilter(filter, btn) {
+  newsFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterNews();
+}
+function filterNews() {
+  const q = document.getElementById('newsSearch').value.toLowerCase();
+  document.querySelectorAll('#newsList .news-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const impact = card.dataset.impact;
+    const region = card.dataset.region;
+    const tags = card.dataset.tags || '';
+    let show = true;
+    if (newsFilter === 'high' && impact !== 'high') show = false;
+    if (newsFilter === 'medium' && impact !== 'medium') show = false;
+    if (newsFilter === 'id' && region !== 'id') show = false;
+    if (newsFilter === 'us' && region !== 'us') show = false;
+    if (newsFilter === 'oil' && !tags.includes('iran') && !tags.includes('minyak') && !tags.includes('oil') && !tags.includes('hormuz') && !tags.includes('energi')) show = false;
+    if (q && !text.includes(q)) show = false;
+    card.style.display = show ? 'block' : 'none';
+  });
+}
+
+// CALENDAR FILTER
+let calFilter = 'all';
+function setCalFilter(filter, btn) {
+  calFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCalendar();
+}
+function filterCalendar() {
+  const q = document.getElementById('calSearch').value.toLowerCase();
+  document.querySelectorAll('#calendarBody tr').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const impact = row.dataset.impact;
+    let show = true;
+    if (calFilter === 'H' && impact !== 'H') show = false;
+    if (calFilter === 'M' && impact !== 'M') show = false;
+    if (q && !text.includes(q)) show = false;
+    row.style.display = show ? '' : 'none';
+  });
+}
+
+// VIEW TOGGLE
+function showView(id, btn) {
+  document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
